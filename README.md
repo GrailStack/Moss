@@ -2,7 +2,7 @@
   <a href="#">
     <img
       alt="moss"
-      src="/doc/images/Moss-Logo.png"
+      src="https://raw.githubusercontent.com/SoftwareKing/cdn/master/images/me20190410204658.png"
       width="25%"
     />
   </a>
