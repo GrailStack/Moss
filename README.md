@@ -196,4 +196,3 @@ info.version: @project.version@
 
 -Xloggc:/opt/logs/gc.log -verbose.gc
 
-https://gitee.com/qinxuewu/boot-actuator
