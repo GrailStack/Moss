@@ -271,3 +271,7 @@ spring:
 
 -Xloggc:/opt/logs/gc.log -verbose.gc
 
+
+## 5.致谢
+
+Moss中的moss-adapter-cloud和moss-core模块部分代码参考了 Spring Boot Admin 的 [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin)，感谢 Codecentric 开源了该框架。
