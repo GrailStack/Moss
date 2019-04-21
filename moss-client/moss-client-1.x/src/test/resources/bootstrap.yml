@@ -1,0 +1,5 @@
+spring:
+  application:
+    group: showcase
+    name: repaymentservice
+    version: 1.0.0
