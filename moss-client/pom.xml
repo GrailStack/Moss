@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.xujin.moss</groupId>
+	<artifactId>moss-client</artifactId>
+	<version>1.0.0.RELEASE</version>
+	<packaging>pom</packaging>
+
+	<name>moss-client</name>
+	<description>moss-client</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<modules>
+		<module>moss-sample-1.5.x</module>
+		<module>moss-sample-2.1.x</module>
+		<module>moss-client-common</module>
+		<module>moss-client-1.x</module>
+		<module>moss-client-2.x</module>
+	</modules>
+</project>
