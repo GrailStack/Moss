@@ -59,6 +59,12 @@ Roadmap 时间点：
 | -------- | -------- | -------- |
 | ✅1.0.0.RELEASE     | **2019.4.21** | 稳定可用版本|
 
+#### 1.2.2 Moss开发团队
+
+| 姓名 | 角色 | github地址|
+| -------- | -------- | -------- |
+|    SoftwareKing  | Owner | https://github.com/SoftwareKing|
+|   iShawnWang  | 前端开发 |https://github.com/iShawnWang |
 
 ### 1.3 Moss的功能
 
