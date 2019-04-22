@@ -48,6 +48,9 @@ public class AppServiceImpl implements AppService {
 
     private static final Log log = LogFactory.getLog(AppServiceImpl.class);
 
+    @Value("${moss.skywalking.url}")
+    private  String skyWalKing_Url;
+
     @Autowired
     private AppMapper appMapper;
 
@@ -129,7 +132,7 @@ public class AppServiceImpl implements AppService {
     public ResultData getTraceTopology(String appName) {
         ResultData resultData = ResultData.builder().build();
         //Skywalking的URL
-        String traceBaseUrl = "";
+        String traceBaseUrl = skyWalKing_Url;
         //查询出SkyWalking中的所有应用信息
         List<Application> applications = findAllApplications(traceBaseUrl);
         String targetApplicationId = null;
