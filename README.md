@@ -271,6 +271,39 @@ spring:
 
 -Xloggc:/opt/logs/gc.log -verbose.gc
 
+### 4.1 切换支持单Nacos
+
+将moss-service/pom.xml中的依赖修改如下
+
+```xml
+ <dependency>
+            <groupId>org.xujin.moss</groupId>
+            <artifactId>moss-adapter-multi-eureka</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+```
+修改为
+```xml
+  <dependency>
+             <groupId>org.xujin.moss</groupId>
+             <artifactId>moss-adapter-single-nacos</artifactId>
+             <version>1.0.0.RELEASE</version>
+         </dependency>
+```
+
+主入口程序代码修改打开
+
+```java
+/**
+ * 单nacos或单eureka需要把@EnableDiscoveryClient注释打开
+ */
+@EnableDiscoveryClient
+@ComponentScan("org.xujin.moss.*")
+public class MossApplication {
+    
+}
+```
+
 
 ## 5.致谢
 
