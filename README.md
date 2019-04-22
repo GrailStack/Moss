@@ -291,19 +291,16 @@ spring:
          </dependency>
 ```
 
-主入口程序代码修改打开
-
-```java
-/**
- * 单nacos或单eureka需要把@EnableDiscoveryClient注释打开
- */
-@EnableDiscoveryClient
-@ComponentScan("org.xujin.moss.*")
-public class MossApplication {
-    
-}
+yml文件配置如下
+```yml
+spring:
+  application:
+    name: halo-moss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 ```
-
 
 ## 5.致谢
 

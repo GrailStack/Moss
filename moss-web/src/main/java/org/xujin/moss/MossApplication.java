@@ -1,10 +1,6 @@
 package org.xujin.moss;
 
-import com.ulisesbocchio.jasyptspringboot.encryptor.DefaultLazyEncryptor;
-import com.ulisesbocchio.jasyptspringboot.encryptor.SimplePBEStringEncryptor;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import org.jasypt.encryption.StringEncryptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
@@ -26,10 +22,7 @@ import javax.servlet.Filter;
 @EnableAutoConfiguration
 @EnableAdminServer
 //@EnableScheduling
-/**
- * 单nacos或单eureka需要把@EnableDiscoveryClient注释打开
- */
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @ComponentScan("org.xujin.moss.*")
 public class MossApplication {
 
