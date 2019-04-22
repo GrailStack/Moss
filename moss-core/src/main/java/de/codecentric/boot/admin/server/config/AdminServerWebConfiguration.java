@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import de.codecentric.boot.admin.server.domain.values.Registration;
 import de.codecentric.boot.admin.server.eventstore.InstanceEventPublisher;
 import de.codecentric.boot.admin.server.eventstore.InstanceEventStore;
-import org.xujin.moss.core.extension.HaloInstancesProxyController;
+import org.xujin.moss.core.extension.MossInstancesProxyController;
 import de.codecentric.boot.admin.server.services.InstanceRegistry;
 import de.codecentric.boot.admin.server.utils.jackson.RegistrationBeanSerializerModifier;
 import de.codecentric.boot.admin.server.utils.jackson.RegistrationDeserializer;
@@ -133,9 +133,9 @@ public class AdminServerWebConfiguration {
          */
         @Bean
         @ConditionalOnMissingBean
-        public HaloInstancesProxyController HaloInstancesProxyController(InstanceRegistry instanceRegistry,
-                                                                     InstanceWebClient instanceWebClient) {
-            return new HaloInstancesProxyController(
+        public MossInstancesProxyController HaloInstancesProxyController(InstanceRegistry instanceRegistry,
+                                                                         InstanceWebClient instanceWebClient) {
+            return new MossInstancesProxyController(
                     adminServerProperties.getContextPath(),
                     adminServerProperties.getInstanceProxy().getIgnoredHeaders(),
                     instanceRegistry,
