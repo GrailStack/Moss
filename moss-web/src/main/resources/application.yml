@@ -44,3 +44,5 @@ info.version: @project.version@
 #management.jolokia.enabled: true
 management.endpoints.health.show-details: true
 
+### 替换成自己的skywalking URL
+moss.skywalking.url: http://skywalking.com
