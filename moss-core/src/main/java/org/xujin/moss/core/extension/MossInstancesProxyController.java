@@ -38,13 +38,13 @@ import java.util.Set;
  * @author xujin
  */
 @AdminController
-public class HaloInstancesProxyController extends AbstractInstancesProxyController {
+public class MossInstancesProxyController extends AbstractInstancesProxyController {
 
     protected static final String HALO_REQUEST_MAPPING_PATH = "/admin/instances/{instanceId}/actuator/**";
 
     private final DataBufferFactory bufferFactory = new DefaultDataBufferFactory();
 
-    public HaloInstancesProxyController(String adminContextPath,
+    public MossInstancesProxyController(String adminContextPath,
                                         Set<String> ignoredHeaders,
                                         InstanceRegistry registry,
                                         InstanceWebClient instanceWebClient) {
