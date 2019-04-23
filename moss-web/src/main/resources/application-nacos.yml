@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: halo-moss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+      url: jdbc:mysql://ip:端口/moss?useUnicode=true&characterEncoding=utf8
+      ## 生产用户名和密码
+      username: 用户名
+      password: 密码
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+  boot:
+    admin:
+      ## 兼容配置Spring Boot 1.X的端点和自定义的端点
+      probed-endpoints: ["metricsInfo","metrics:metrics","infoLogFile","errorLogFile","jardeps","appInfo","health", "env", "metrics", "httptrace:trace", "httptrace", "threaddump:dump", "threaddump", "jolokia", "info", "logfile", "refresh", "flyway", "liquibase", "heapdump", "loggers", "auditevents", "mappings", "scheduledtasks", "configprops", "caches", "beans"]
+
+server:
+  port: 8082
+
+
+info.groupId: @project.groupId@
+info.artifactId: @project.artifactId@
+info.version: @project.version@
+
+#management.jolokia.enabled: true
+management.endpoints.health.show-details: true
+

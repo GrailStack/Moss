@@ -1,0 +1,24 @@
+server:
+  port: 8085
+# spring.application.name 用于指定注册到Eureka Server上的应用名称
+
+spring:
+  application:
+    name: moss-sample-1.5.x
+eureka:
+  client:
+    filterOnlyUpInstances: false
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone:   http://eureka.springcloud.cn/eureka/
+ #eureka.instance.prefer-ip-address  表示将自己的IP注册到Eureka Server上，
+ #如果不配置,会将当前服务提供者所在的主机名注册到Eureka Server上。
+  instance:
+    prefer-ip-address: true
+
+
+management.port: 8086
+
+info.groupId: @project.groupId@
+info.artifactId: @project.artifactId@
+info.version: @project.version@

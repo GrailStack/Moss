@@ -1,0 +1,2 @@
+org.springframework.boot.actuate.autoconfigure.ManagementContextConfiguration=org.xujin.moss.config.AdminEndPointConfiguration
+org.springframework.boot.SpringApplicationRunListener=org.xujin.moss.config.AdminEndpointApplicationRunListener
