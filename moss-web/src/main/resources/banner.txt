@@ -1,22 +1,22 @@
 ${AnsiColor.BRIGHT_BLACK}
 
 
-          ____      ,----..
-        ,'  , `.   /   /   \    .--.--.    .--.--.     Moss Version: ${application.formatted-version}
-     ,-+-,.' _ |  /   .     :  /  /    '. /  /    '.   Port: ${server.port}  Pid: ${pid}
-  ,-+-. ;   , || .   /   ;.  \|  :  /`. /|  :  /`. /
- ,--.'|'   |  ;|.   ;   /  ` ;;  |  |--` ;  |  |--`    Console: http://127.0.0.1:${server.port}
-|   |  ,', |  ':;   |  ; \ ; ||  :  ;_   |  :  ;_      Running Spring Boot ${spring-boot.version}
-|   | /  | |  |||   :  | ; | ' \  \    `. \  \    `.
-'   | :  | :  |,.   |  ' ' ' :  `----.   \ `----.   \   更多访问: http://xujin.org
-;   . |  ; |--' '   ;  \; /  |  __ \  \  | __ \  \  |
-|   : |  | ,     \   \  ',  /  /  /`--'  //  /`--'  /
-|   : '  |/       ;   :    /  '--'.     /'--'.     /
-;   | |`-'         \   \ .'     `--'---'   `--'---'
-|   ;/              `---`
-'---'
+${AnsiColor.BLUE}           ____  ${AnsiColor.BLACK}    ,----..   ${AnsiColor.RED}           ${AnsiColor.BLUE}             ${AnsiColor.BLACK}
+${AnsiColor.BLUE}         ,'  , `.${AnsiColor.BLACK}   /   /   \  ${AnsiColor.RED}  .--.--.  ${AnsiColor.BLUE}  .--.--.    ${AnsiColor.BLACK} Moss Version: ${application.formatted-version}
+${AnsiColor.BLUE}      ,-+-,.' _ |${AnsiColor.BLACK}  /   .     : ${AnsiColor.RED} /  /    '.${AnsiColor.BLUE} /  /    '.  ${AnsiColor.BLACK} Port: ${server.port}  Pid: ${pid}
+${AnsiColor.BLUE}   ,-+-. ;   , ||${AnsiColor.BLACK} .   /   ;.  \${AnsiColor.RED}|  :  /`. /${AnsiColor.BLUE}|  :  /`. /  ${AnsiColor.BLACK}
+${AnsiColor.BLUE}  ,--.'|'   |  ;|${AnsiColor.BLACK}.   ;   /  ` ;${AnsiColor.RED};  |  |--` ${AnsiColor.BLUE};  |  |--`   ${AnsiColor.BLACK} Console: http://127.0.0.1:${server.port}
+${AnsiColor.BLUE} |   |  ,', |  ':${AnsiColor.BLACK};   |  ; \ ; |${AnsiColor.RED}|  :  ;_   ${AnsiColor.BLUE}|  :  ;_     ${AnsiColor.BLACK} Running Spring Boot ${spring-boot.version}
+${AnsiColor.BLUE} |   | /  | |  ||${AnsiColor.BLACK}|   :  | ; | '${AnsiColor.RED} \  \    `.${AnsiColor.BLUE} \  \    `.  ${AnsiColor.BLACK}
+${AnsiColor.BLUE} '   | :  | :  |,${AnsiColor.BLACK}.   |  ' ' ' :${AnsiColor.RED}  `----.   \${AnsiColor.BLUE} `----.   \ ${AnsiColor.BLACK}  更多访问: http://xujin.org
+${AnsiColor.BLUE} ;   . |  ; |--' ${AnsiColor.BLACK}'   ;  \; /  |${AnsiColor.RED}  __ \  \  |${AnsiColor.BLUE} __ \  \  | ${AnsiColor.BLACK}
+${AnsiColor.BLUE} |   : |  | ,    ${AnsiColor.BLACK} \   \  ',  / ${AnsiColor.RED} /  /`--'  /${AnsiColor.BLUE}/  /`--'  / ${AnsiColor.BLACK}
+${AnsiColor.BLUE} |   : '  |/     ${AnsiColor.BLACK}  ;   :    /  ${AnsiColor.RED}'--'.     /${AnsiColor.BLUE}'--'.     /  ${AnsiColor.BLACK}
+${AnsiColor.BLUE} ;   | |`-'      ${AnsiColor.BLACK}   \   \ .'   ${AnsiColor.RED}  `--'---' ${AnsiColor.BLUE}  `--'---'   ${AnsiColor.BLACK}
+${AnsiColor.BLUE} |   ;/          ${AnsiColor.BLACK}    `---`     ${AnsiColor.RED}           ${AnsiColor.BLUE}             ${AnsiColor.BLACK}
+${AnsiColor.BLUE} '---'           ${AnsiColor.BLACK}              ${AnsiColor.RED}           ${AnsiColor.BLUE}             ${AnsiColor.BLACK}
 
-${AnsiColor.BLACK}>>>>>>>>>>>>莫斯(Moss)，让Spring Cloud应用不再"四处流浪"！<<<<<<<<<<<<
+${AnsiColor.BLACK}>>>>>>>>>>>>莫斯(Moss)，让Spring Cloud应用不再"四处流浪"！<<<<<<<<<<<<${AnsiColor.WHITE}
 
 
 
