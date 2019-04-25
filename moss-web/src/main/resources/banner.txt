@@ -16,7 +16,7 @@ ${AnsiColor.BLUE} ;   | |`-'      ${AnsiColor.BLACK}   \   \ .'   ${AnsiColor.RE
 ${AnsiColor.BLUE} |   ;/          ${AnsiColor.BLACK}    `---`     ${AnsiColor.RED}           ${AnsiColor.BLUE}             ${AnsiColor.BLACK}
 ${AnsiColor.BLUE} '---'           ${AnsiColor.BLACK}              ${AnsiColor.RED}           ${AnsiColor.BLUE}             ${AnsiColor.BLACK}
 
-${AnsiColor.BLACK}>>>>>>>>>>>>莫斯(Moss)，让Spring Cloud应用不再"四处流浪"！<<<<<<<<<<<<${AnsiColor.WHITE}
+${AnsiColor.BLACK}>>>>>>>>>>>>莫斯(Moss)，让Spring Cloud应用不再"四处流浪"！<<<<<<<<<<<<${AnsiColor.BLACK}
 
 
 

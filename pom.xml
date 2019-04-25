@@ -97,12 +97,6 @@
 				<version>1.0.0.RELEASE</version>
 			</dependency>
 
-<!--			<dependency>-->
-<!--				 <groupId>org.xujin.moss</groupId>-->
-<!--				<artifactId>moss-business</artifactId>-->
-<!--				<version>1.0.0.RELEASE</version>-->
-<!--			</dependency>-->
-
 			<dependency>
 				 <groupId>org.xujin.moss</groupId>
 				<artifactId>moss-adapter-cloud</artifactId>
