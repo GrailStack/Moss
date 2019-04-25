@@ -25,6 +25,11 @@ Moss(莫斯),让Spring Cloud应用不再流浪！
  
  >Spring Cloud中国社区从2017年11月份，开始规划Spring Cloud Admin的开发和设计，专注于研究这个领域。Moss将会选择一个合适的时机开源，需要更多了解的可以加我微信Software_King。
  
+ Moss-钉钉答疑群:
+ 
+ ![钉钉答疑群](/doc/images/ddq.jpeg)
+ 
+       
  #### 1.2.1 竞品分析
 
  Moss的竞品分析对比如下表所示:
@@ -312,3 +317,8 @@ spring:
 ## 5.致谢
 
 Moss中的moss-adapter-cloud和moss-core模块部分代码参考了 [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin)，感谢 Codecentric 开源了该框架。
+
+## 6.Stargazers over time
+ 
+ [![Stargazers over time](https://starchart.cc/SpringCloud/Moss.svg)](https://starchart.cc/SpringCloud/Moss)
+       
