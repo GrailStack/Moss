@@ -2,10 +2,10 @@ spring:
   application:
     name: halo-moss
   datasource:
-    url: jdbc:mysql://ip:端口/moss?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://ip:端口/moss?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: 用户名
     password: 密码
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     filters: stat
     maxActive: 20
