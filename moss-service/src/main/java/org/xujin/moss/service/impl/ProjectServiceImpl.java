@@ -80,13 +80,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public int totalProjectConut() {
-        return projectMapper.totalConut();
+    public int totalProjectCount() {
+        return projectMapper.totalCount();
     }
 
     @Override
-    public int totalProjectConutByOwnerId(String ownerId) {
-        return projectMapper.totalMyprojectConut(ownerId);
+    public int totalProjectCountByOwnerId(String ownerId) {
+        return projectMapper.totalMyprojectCount(ownerId);
     }
 
     @Override

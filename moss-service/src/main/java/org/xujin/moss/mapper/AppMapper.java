@@ -14,23 +14,23 @@ public interface AppMapper extends BaseMapper<App> {
     IPage<App> selectPageVo(Page page, @Param("state") Integer state);
 
     @Select("SELECT Count(*) FROM t_app where is_deleted=0")
-    int totalConut();
+    int totalCount();
 
-    @Select("SELECT Count(*) FROM t_app a where a.is_deleted=0 and a.framework_verison=#{version}")
-    int totalUseFrameworkConut(@Param("version") int version);
+    @Select("SELECT Count(*) FROM t_app a where a.is_deleted=0 and a.framework_version=#{version}")
+    int totalUseFrameworkCount(@Param("version") int version);
 
 
     @Select("SELECT Count(*) FROM t_app a where a.is_deleted=0 and a.spring_boot_version=#{version}")
-    int totalUseSbVerisonConut(@Param("version") int version);
+    int totalUseSbVersionCount(@Param("version") int version);
 
     @Select("SELECT Count(*) FROM t_app a where a.is_deleted=0 and a.spring_cloud_version=#{version}")
-    int totalUseScVerisonConut(@Param("version") int version);
+    int totalUseScVersionCount(@Param("version") int version);
 
     @Select("SELECT Count(*) FROM t_app a where a.is_deleted=0 and a.take_over=#{takeOver}")
-    int totalTakeOverConut(@Param("takeOver") int takeOver);
+    int totalTakeOverCount(@Param("takeOver") int takeOver);
 
     @Select("SELECT Count(*) FROM t_app a where a.is_deleted=0 and a.owner_id=#{ownerId}")
-    int totalMyAppConut(@Param("ownerId") String ownerId);
+    int totalMyAppCount(@Param("ownerId") String ownerId);
 
    /* @Select("select * from t_app a where a.is_deleted=0 and a.project_key=#{projectKey} and  a.status=#{status} and a.take_over=#{takeOver} " +
             " and a.name like %#{name}% ")

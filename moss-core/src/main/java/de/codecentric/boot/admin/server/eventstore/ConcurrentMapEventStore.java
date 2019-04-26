@@ -119,7 +119,7 @@ public abstract class ConcurrentMapEventStore extends InstanceEventPublisher imp
 
     private OptimisticLockingException createOptimisticLockException(InstanceEvent event, long lastVersion) {
         return new OptimisticLockingException(
-            "Verison " + event.getVersion() + " was overtaken by " + lastVersion + " for " + event.getInstance());
+            "Version " + event.getVersion() + " was overtaken by " + lastVersion + " for " + event.getInstance());
     }
 
     protected static long getLastVersion(List<InstanceEvent> events) {

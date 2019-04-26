@@ -25,9 +25,9 @@ public interface AppService {
 
     boolean checkAppAndMappingName(String appName);
 
-    int totalAppConut();
+    int totalAppCount();
 
-    int totalMyAppConut(String userName);
+    int totalMyAppCount(String userName);
 
     AppModel findAppById(Long id);
 

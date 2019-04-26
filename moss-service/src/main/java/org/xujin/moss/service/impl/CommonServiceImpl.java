@@ -55,10 +55,10 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public BasicDashboardVO initBasicDashboard(String userName) {
         BasicDashboardVO basicDashboardVO = new BasicDashboardVO();
-        basicDashboardVO.setAppNum(appService.totalAppConut());
-        basicDashboardVO.setProjectNum(projectService.totalProjectConut());
-        basicDashboardVO.setMyAppNum(appService.totalMyAppConut(userName));
-        basicDashboardVO.setMyProjectNum(projectService.totalProjectConutByOwnerId(userName));
+        basicDashboardVO.setAppNum(appService.totalAppCount());
+        basicDashboardVO.setProjectNum(projectService.totalProjectCount());
+        basicDashboardVO.setMyAppNum(appService.totalMyAppCount(userName));
+        basicDashboardVO.setMyProjectNum(projectService.totalProjectCountByOwnerId(userName));
         List<UserRoleModel> userRoleModelList=userRolesService.getByUsername(userName);
         if(null!=userRoleModelList&&userRoleModelList.size()>0){
             basicDashboardVO.setRole(userRoleModelList.get(0).getRole());

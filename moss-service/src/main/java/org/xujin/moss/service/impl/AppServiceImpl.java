@@ -171,7 +171,7 @@ public class AppServiceImpl implements AppService {
     @Override
     public Map<String,Object> getUseReport() {
         Map<String,Object> map=new HashMap<>();
-        map.put("count", appMapper.totalConut());
+        map.put("count", appMapper.totalCount());
         List<ReportModel>  scList=new ArrayList<ReportModel>();
         List<ReportModel>  sbList=new ArrayList<ReportModel>();
 
@@ -179,7 +179,7 @@ public class AppServiceImpl implements AppService {
         for (MetaDataModel model:sclist) {
             ReportModel reportModel=new ReportModel();
             reportModel.setName(model.getName());
-            reportModel.setCount(appMapper.totalUseScVerisonConut(Integer.parseInt(model.getValue())));
+            reportModel.setCount(appMapper.totalUseScVersionCount(Integer.parseInt(model.getValue())));
             scList.add(reportModel);
         }
         map.put("springCloudVersions",scList);
@@ -189,7 +189,7 @@ public class AppServiceImpl implements AppService {
         for (MetaDataModel model:sblist) {
             ReportModel reportModel=new ReportModel();
             reportModel.setName(model.getName());
-            reportModel.setCount(appMapper.totalUseSbVerisonConut(Integer.parseInt(model.getValue())));
+            reportModel.setCount(appMapper.totalUseSbVersionCount(Integer.parseInt(model.getValue())));
             sbList.add(reportModel);
         }
         map.put("sprintBootVersions",sbList);
@@ -198,7 +198,7 @@ public class AppServiceImpl implements AppService {
         for (AppTakeOverEnum appTakeOverEnum : AppTakeOverEnum.values()) {
             ReportModel reportModel=new ReportModel();
             reportModel.setName(appTakeOverEnum.getDesc());
-            reportModel.setCount(appMapper.totalTakeOverConut(appTakeOverEnum.getValue()));
+            reportModel.setCount(appMapper.totalTakeOverCount(appTakeOverEnum.getValue()));
             takeOverList.add(reportModel);
         }
         map.put("takeOver",takeOverList);
@@ -224,13 +224,13 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public int totalAppConut() {
-        return appMapper.totalConut();
+    public int totalAppCount() {
+        return appMapper.totalCount();
     }
 
     @Override
-    public int totalMyAppConut(String userName) {
-        return appMapper.totalMyAppConut(userName);
+    public int totalMyAppCount(String userName) {
+        return appMapper.totalMyAppCount(userName);
     }
 
     @Override

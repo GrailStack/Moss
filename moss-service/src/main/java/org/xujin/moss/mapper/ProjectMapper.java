@@ -14,10 +14,10 @@ import org.apache.ibatis.annotations.Select;
 public interface ProjectMapper extends BaseMapper<Project> {
 
     @Select("SELECT Count(*) FROM t_project where is_deleted=0")
-    int totalConut();
+    int totalCount();
 
     @Select("SELECT Count(*) FROM t_project a where a.is_deleted=0 and a.owner_id=#{ownerId}")
-    int totalMyprojectConut(@Param("ownerId") String ownerId);
+    int totalMyprojectCount(@Param("ownerId") String ownerId);
 
     @Select("SELECT * FROM t_project a where a.is_deleted=0 and a.key=#{key}")
     Project findProjectByKey(@Param("key") String key);

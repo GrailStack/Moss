@@ -16,9 +16,9 @@ public interface ProjectService {
 
     void update(ProjectModel model) ;
 
-    int totalProjectConut();
+    int totalProjectCount();
 
-    int totalProjectConutByOwnerId(String ownerId);
+    int totalProjectCountByOwnerId(String ownerId);
 
     void deleteProjectById(Long id) ;
 
