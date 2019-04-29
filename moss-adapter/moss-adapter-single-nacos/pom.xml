@@ -8,7 +8,7 @@
     <artifactId>moss-adapter-single-nacos</artifactId>
     <version>1.0.0.RELEASE</version>
     <properties>
-        <sc-nacos-discovery.version>0.2.1.RELEASE</sc-nacos-discovery.version>
+        <sc-nacos-discovery.version>0.9.0.RELEASE</sc-nacos-discovery.version>
     </properties>
 
     <dependencies>
