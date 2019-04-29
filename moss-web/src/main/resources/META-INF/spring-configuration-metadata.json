@@ -1,0 +1,12 @@
+{
+  "hints": [],
+  "groups": [],
+  "properties": [
+    {
+      "name": "logging.moss.path",
+      "type": "java.lang.String",
+      "defaultValue":"/opt/app/logs",
+      "description":"logback files prefix."
+    }
+  ]
+}
