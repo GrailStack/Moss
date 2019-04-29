@@ -29,6 +29,7 @@ spring:
 server:
   port: 8080
 
+
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
@@ -46,3 +47,7 @@ management.endpoints.health.show-details: true
 
 ### 替换成自己的skywalking URL
 moss.skywalking.url: http://skywalking.com
+
+logging:
+  moss:
+    path: /opt/app/logs
