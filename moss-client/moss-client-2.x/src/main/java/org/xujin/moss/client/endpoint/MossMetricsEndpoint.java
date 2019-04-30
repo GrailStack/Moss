@@ -53,10 +53,11 @@ public class MossMetricsEndpoint {
         haloMetricResponse.setJvmMemoryUsedHeap(String.valueOf(jvmNemoryUsedHeap.getMeasurements().get(0).getValue()));
         MetricResponse jvmNemoryUsedNonHeap=metric("jvm.memory.used", Arrays.asList("area:nonheap") );
         haloMetricResponse.setJvmMemoryUsedNonHeap(String.valueOf(jvmNemoryUsedNonHeap.getMeasurements().get(0).getValue()));
-
+        // 2.0 actuator/metrics 中没有这个key
         MetricResponse systemLoadAverage=metric("system.load.average.1m", null );
-        haloMetricResponse.setSystemloadAverage(String.valueOf(systemLoadAverage.getMeasurements().get(0).getValue()));
-
+        if(systemLoadAverage!=null){
+            haloMetricResponse.setSystemloadAverage(String.valueOf(systemLoadAverage.getMeasurements().get(0).getValue()));
+        }
         MetricResponse heapCommitted=metric("jvm.memory.committed", Arrays.asList("area:heap") );
         haloMetricResponse.setHeapCommitted(String.valueOf(heapCommitted.getMeasurements().get(0).getValue()));
         MetricResponse nonheapCommitted=metric("jvm.memory.committed", Arrays.asList("area:nonheap") );
@@ -64,8 +65,6 @@ public class MossMetricsEndpoint {
 
         MetricResponse heapMax=metric("jvm.memory.max", Arrays.asList("area:heap") );
         haloMetricResponse.setHeapMax(String.valueOf(heapMax.getMeasurements().get(0).getValue()));
-
-
         getGcinfo(haloMetricResponse);
         MemoryUsage memoryUsage = ManagementFactory.getMemoryMXBean()
                 .getHeapMemoryUsage();
