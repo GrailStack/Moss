@@ -20,15 +20,18 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
-
   boot:
     admin:
       ## 兼容配置Spring Boot 1.X的端点和自定义的端点
       probed-endpoints: ["metricsInfo","metrics:metrics","infoLogFile","errorLogFile","jardeps","appInfo","health", "env", "metrics", "httptrace:trace", "httptrace", "threaddump:dump", "threaddump", "jolokia", "info", "logfile", "refresh", "flyway", "liquibase", "heapdump", "loggers", "auditevents", "mappings", "scheduledtasks", "configprops", "caches", "beans"]
+  liquibase:
+    change-log: classpath:config/liquibase/master.xml
+    drop-first: false  # true 优先drop整库之后，顺序执行 master.xml
+    enabled: true
+    check-change-log-location: true
 
 server:
   port: 8080
-
 
 eureka:
   instance:
