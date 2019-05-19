@@ -20,7 +20,6 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
-
   boot:
     admin:
       ## 兼容配置Spring Boot 1.X的端点和自定义的端点
@@ -28,7 +27,6 @@ spring:
 
 server:
   port: 8080
-
 
 eureka:
   instance:

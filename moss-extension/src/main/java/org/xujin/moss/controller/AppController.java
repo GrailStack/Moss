@@ -42,10 +42,10 @@ public class AppController {
      */
     @PostMapping("/add")
     public ResultData addApp(@RequestBody AppModel appModel) {
-        ResultData result = new ResultData();
         appModel.setIsDeleted(Constants.IS_DELETE_FALSE);
         appService.addApp(appModel);
-        return result;
+        //返回成功状态
+        return ResultData.builder().data(appModel).build();
     }
 
     @GetMapping("/{id}")
