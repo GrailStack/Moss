@@ -6,7 +6,6 @@ import org.springframework.boot.actuate.endpoint.mvc.AbstractNamedMvcEndpoint;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.xujin.moss.client.config.AdminEndpointApplicationRunListener;
 import org.xujin.moss.client.utils.Analyzer;
 
 import javax.annotation.PostConstruct;
