@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+      discovery:
+        root: /moss-client
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        exclude: ['pause', 'refresh', 'restart', 'resume', 'shutdown', 'heapdump']
+    jmx:
+      exposure:
+        include: '*'
+        exclude: ['pause', 'refresh', 'restart', 'resume', 'shutdown', 'heapdump']
+  endpoint:
+    health:
+      show-details: always
+    heapdump:
+      enabled: false
+    pause:
+      enabled: false
+    refresh:
+      enabled: false
+    restart:
+      enabled: false
+    resume:
+      enabled: false
+    shutdown:
+      enabled: false
+  info:
+    git:
+      mode: full

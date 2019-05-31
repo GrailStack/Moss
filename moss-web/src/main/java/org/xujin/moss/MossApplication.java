@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.xujin.moss.filter.CorsFilter;
@@ -24,6 +25,7 @@ import javax.servlet.Filter;
 //@EnableScheduling
 @EnableDiscoveryClient
 @ComponentScan("org.xujin.moss.*")
+@EnableAsync
 public class MossApplication {
 
 	@Bean
