@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 the original author or authors.
+ * Copyright 2014-2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
+import reactor.retry.Retry;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -45,7 +46,6 @@ public class StatusUpdateTrigger extends AbstractEventHandler<InstanceEvent> {
     @Nullable
     private Disposable intervalSubscription;
 
-
     public StatusUpdateTrigger(StatusUpdater statusUpdater, Publisher<InstanceEvent> publisher) {
         super(publisher, InstanceEvent.class);
         this.statusUpdater = statusUpdater;
@@ -56,23 +56,27 @@ public class StatusUpdateTrigger extends AbstractEventHandler<InstanceEvent> {
         super.start();
         Scheduler scheduler = Schedulers.newSingle("status-monitor");
         intervalSubscription = Flux.interval(updateInterval)
-                                   .doOnSubscribe(s -> log.debug("Scheduled status update every {}", updateInterval))
-                                   .log(log.getName(), Level.FINEST).subscribeOn(scheduler)
-                                   .concatMap(i -> this.updateStatusForAllInstances())
-                                   .onErrorContinue((ex, value) -> log.warn("Unexpected error while updating statuses",
-                                       ex
-                                   )).doFinally(s -> scheduler.dispose())
-                                   .subscribe();
+                .doOnSubscribe(s -> log.debug("Scheduled status update every {}", updateInterval))
+                .log(log.getName(), Level.FINEST)
+                .subscribeOn(scheduler)
+                .concatMap(i -> this.updateStatusForAllInstances())
+                .retryWhen(Retry.any()
+                        .retryMax(Long.MAX_VALUE)
+                        .doOnRetry(ctx -> log.warn("Unexpected error when updating statuses",
+                                ctx.exception()
+                        )))
+                .doFinally(s -> scheduler.dispose())
+                .subscribe();
     }
 
     @Override
     protected Publisher<Void> handle(Flux<InstanceEvent> publisher) {
         Scheduler scheduler = Schedulers.newSingle("status-updater");
         return publisher.subscribeOn(scheduler)
-                        .filter(event -> event instanceof InstanceRegisteredEvent ||
-                                         event instanceof InstanceRegistrationUpdatedEvent)
-                        .flatMap(event -> updateStatus(event.getInstance()))
-                        .doFinally(s -> scheduler.dispose());
+                .filter(event -> event instanceof InstanceRegisteredEvent ||
+                        event instanceof InstanceRegistrationUpdatedEvent)
+                .flatMap(event -> updateStatus(event.getInstance()))
+                .doFinally(s -> scheduler.dispose());
     }
 
     @Override
@@ -87,10 +91,10 @@ public class StatusUpdateTrigger extends AbstractEventHandler<InstanceEvent> {
         log.debug("Updating status for all instances");
         Instant expiryInstant = Instant.now().minus(statusLifetime);
         return Flux.fromIterable(lastQueried.entrySet())
-                   .filter(e -> e.getValue().isBefore(expiryInstant))
-                   .map(Map.Entry::getKey)
-                   .flatMap(this::updateStatus)
-                   .then();
+                .filter(e -> e.getValue().isBefore(expiryInstant))
+                .map(Map.Entry::getKey)
+                .flatMap(this::updateStatus)
+                .then();
     }
 
     protected Mono<Void> updateStatus(InstanceId instanceId) {
