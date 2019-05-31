@@ -2,18 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.7.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 
 	<groupId>org.xujin.moss</groupId>
 	<artifactId>moss-client-2.x</artifactId>
 	<version>1.0.0.RELEASE</version>
 	<packaging>jar</packaging>
-
 
 	<name>moss-client-2.x</name>
 	<description>moss-client-2.x</description>
@@ -26,15 +19,39 @@
 		<guava.version>20.0</guava.version>
 		<lombok.version>1.16.22</lombok.version>
 		<maven.model.version>3.6.0</maven.model.version>
+
+		<spring-boot-version>2.0.6.RELEASE</spring-boot-version>
+		<spring-cloud-version>Finchley.SR2</spring-cloud-version>
 	</properties>
 
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>${spring-boot-version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-parent</artifactId>
+				<version>${spring-cloud-version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
 			 <groupId>org.xujin.moss</groupId>
 			<artifactId>moss-client-common</artifactId>
 			<version>1.0.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -68,7 +85,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
 		</dependency>
 
 		<dependency>
@@ -80,7 +96,17 @@
 			<groupId>org.jolokia</groupId>
 			<artifactId>jolokia-core</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+    </dependencies>
 
 
 	<build>
@@ -116,6 +142,7 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
+					<compilerArgument>-parameters</compilerArgument>
 				</configuration>
 			</plugin>
 			<plugin>

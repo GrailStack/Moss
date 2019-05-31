@@ -1,25 +1,24 @@
 package org.xujin.moss.client.endpoint;
-
-import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
-import org.springframework.boot.actuate.endpoint.annotation.Selector;
-import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
+import org.springframework.boot.actuate.endpoint.mvc.AbstractNamedMvcEndpoint;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.FileNotFoundException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@WebEndpoint(id = "logfile")
-public class LogFileEndPoint {
+public class LogFileEndPoint extends AbstractNamedMvcEndpoint {
 
     private LogFileRegistry registry;
 
     public LogFileEndPoint(Environment environment, LogFileRegistry registry) {
+        super("logfile", "/logfile", true);
         this.registry = registry;
     }
-    @ReadOperation
+    @GetMapping
     @ResponseBody
     public ListNamesResponse listNames() {
         return new ListNamesResponse(collectNames(this.registry));
@@ -31,9 +30,9 @@ public class LogFileEndPoint {
                 .collect(Collectors.toSet());
     }
 
-    @ReadOperation
+    @GetMapping(value = "/{requiredLogFileName}", produces = "text/plain")
     @ResponseBody
-    public Resource retriveLogfile(@Selector String requiredLogFileName) throws FileNotFoundException {
+    public Resource retriveLogfile(@PathVariable String requiredLogFileName) throws FileNotFoundException {
 
         return this.registry.getFile(requiredLogFileName);
     }

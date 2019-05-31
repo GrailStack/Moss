@@ -35,7 +35,6 @@ public class Analyzer {
     private static List<PomInfo> getAllJarPomInfo() throws IOException {
         List<PomInfo> pomInfos = Lists.newArrayList();
         String metaPath = "META-INF";
-
         Enumeration<URL> urls = Analyzer.class.getClassLoader().getResources(metaPath);
         while (urls.hasMoreElements()) {
             URL url = urls.nextElement();
