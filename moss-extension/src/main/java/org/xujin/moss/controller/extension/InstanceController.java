@@ -101,7 +101,7 @@ public class InstanceController extends BaseController {
         return ResultData.ok(pageResul).build();
     }
 
-    @GetMapping(path = "/instances/{id}")
+    @GetMapping(path = "/instances/{id:.*}")
     public ResultData instance(@PathVariable String id) {
         Instance instance=registry.getInstance(InstanceId.of(id))
                 .filter(Instance::isRegistered).block();
@@ -116,7 +116,7 @@ public class InstanceController extends BaseController {
      * @param id
      * @return
      */
-    @GetMapping(path = "/instances/events/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/instances/events/{id:.*}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResultData eventBInstanceId(@PathVariable String id) {
         List<InstanceEvent> list=ReactorUtils.optional(eventStore.find(InstanceId.of(id))).map(r -> r.stream()).get().collect(Collectors.toList());
         return ResultData.ok(list).build();

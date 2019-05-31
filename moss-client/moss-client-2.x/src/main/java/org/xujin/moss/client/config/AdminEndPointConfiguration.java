@@ -1,16 +1,23 @@
 package org.xujin.moss.client.config;
 
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.x.discovery.details.InstanceSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.actuate.info.SimpleInfoContributor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
+import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryProperties;
+import org.springframework.cloud.zookeeper.discovery.ZookeeperInstance;
+import org.springframework.cloud.zookeeper.support.ServiceDiscoveryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.xujin.moss.client.endpoint.*;
 
 @Configuration
+@EnableConfigurationProperties(LogFileRegistry.class)
 public class AdminEndPointConfiguration {
 
     @Autowired
@@ -22,13 +29,8 @@ public class AdminEndPointConfiguration {
     }
 
     @Bean
-    public InfoLogFileEndPoint infoLogFileEndPoin() {
-        return new InfoLogFileEndPoint();
-    }
-
-    @Bean
-    public ErrorLogFileEndPoint errorLogFileEndPoint() {
-        return new ErrorLogFileEndPoint();
+    public LogFileEndPoint logFileEndPoint(LogFileRegistry logFileRegistry) {
+        return new LogFileEndPoint(env, logFileRegistry);
     }
 
 
@@ -57,5 +59,15 @@ public class AdminEndPointConfiguration {
     public SimpleInfoContributor springBootVersionInfoContributor() {
         return new SimpleInfoContributor("spring-boot-version", SpringBootVersion.getVersion());
     }
+    @Bean
+    public ServiceDiscoveryCustomizer defaultServiceDiscoveryCustomizer(CuratorFramework curator,
+                                                                               ZookeeperDiscoveryProperties properties,
+                                                                               InstanceSerializer<ZookeeperInstance> serializer) {
+        return new AutoRegistrationCustomizer(curator, properties, serializer);
+    }
 
+    @Bean
+    public MetaDataProvider metaDataProvider() {
+        return new MetaDataProvider();
+    }
 }

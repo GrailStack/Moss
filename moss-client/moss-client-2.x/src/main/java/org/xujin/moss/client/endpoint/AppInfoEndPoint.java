@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
-@RestControllerEndpoint(id = "appInfo")
+@RestControllerEndpoint(id = "appinfo")
 @Slf4j
 public class AppInfoEndPoint {
 

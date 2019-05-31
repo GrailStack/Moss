@@ -1,5 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.xujin.moss.client.config.AdminEndPointConfiguration
+    org.xujin.moss.client.config.AdminEndPointConfiguration
 org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration=\
-org.xujin.moss.client.config.ManagementConfig
-org.springframework.boot.SpringApplicationRunListener=org.xujin.moss.client.config.AdminEndpointApplicationRunListener
+    org.xujin.moss.client.config.ManagementConfig
+org.springframework.boot.SpringApplicationRunListener=\
+    org.xujin.moss.client.config.AdminEndpointApplicationRunListener
+org.xujin.moss.client.config.EnvironmentCustomizer=\
+    org.xujin.moss.client.config.ManagementEnvironmentCustomizer

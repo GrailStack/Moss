@@ -6,22 +6,22 @@ public class HaloMetricResponse {
     private String jvmMemoryUsedHeap;
     private String jvmMemoryUsedNonHeap;
 
-    private  String heapCommitted;
+    private String heapCommitted;
 
-    private String  nonheapCommitted;
+    private String nonheapCommitted;
 
-    private String  heapInit;
-    private String  heapMax;
+    private String heapInit;
+    private String heapMax;
 
-    private  String gcPsMarksweepCount;
+    private String gcPsMarksweepCount;
 
-    private  String gcPsMarksweepTime;
+    private String gcPsMarksweepTime;
 
     private String gcPsScavengeCount;
 
     private String gcPsScavengeTime;
 
-    private String  systemloadAverage;
+    private String systemloadAverage;
 
     private String processors;
 

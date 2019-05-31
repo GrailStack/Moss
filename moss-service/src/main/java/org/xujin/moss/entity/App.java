@@ -40,7 +40,7 @@ public class App extends BaseEntity{
      * 所属项目Id
      */
     @TableField("project_key")
-    private String projectKey;;
+    private String projectKey;
 
     /**
      * 应用描述
