@@ -25,14 +25,13 @@ public class JwtUtil {
      * @param username 用户名
      * @return 加密的token
      */
-    public static String createToken(String username,String password) {
+    public static String createToken(String username) {
         try {
             Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             // 附带username信息
             return JWT.create()
                     .withClaim("username", username)
-                    .withClaim("password",password)
                     //到期时间
                     .withExpiresAt(date)
                     //创建一个新的JWT，并使用给定的算法进行标记
@@ -49,13 +48,12 @@ public class JwtUtil {
      * @param username 用户名
      * @return 是否正确
      */
-    public static boolean verify(String token, String username,String password) {
+    public static boolean verify(String token, String username) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             //在token中附带了username信息
             JWTVerifier verifier = JWT.require(algorithm)
                     .withClaim("username", username)
-                    .withClaim("password",password)
                     .build();
             //验证 token
             verifier.verify(token);
@@ -78,16 +76,5 @@ public class JwtUtil {
             return null;
         }
     }
-
-
-    public static String getPassWord(String token) {
-        try {
-            DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("password").asString();
-        } catch (JWTDecodeException e) {
-            return null;
-        }
-    }
-
 
 }
