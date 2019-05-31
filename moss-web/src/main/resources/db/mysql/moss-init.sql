@@ -33,7 +33,10 @@ CREATE TABLE `t_app` (
 --  Records of `t_app`
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_app` VALUES ('1', 'halo-moss', 'halo-moss', '许进', 'xujin', 'halo', 'Halo', '', '2019-02-27 02:23:42', '2019-04-21 10:15:04', '0', '2', '1', '韩令三', 'lingshan.han', 'https://github.com/SoftwareKing/Moss.git', 'XX', 'halo-moss', '2', '2'), ('2', 'moss-sample-1.5.x', 'moss-sample-1.5.x', '杜为极', 'weiji.du', 'BKCASHIER', 'MOSS', '', '2019-02-27 02:23:42', '2019-04-21 10:15:27', '0', '2', '1', '叶张', 'dingf.ye001', 'https://github.com/SoftwareKing/Moss.git', '金融XX', 'moss-sample-1.5.x', '1', '1'), ('3', 'hdata-labhub', 'moss-sample-2.1.x', '许进', 'guojian.li', 'MOSS', 'MOSS', '', '2019-02-27 02:23:42', '2019-04-21 10:15:22', '0', '2', '1', '齐思宇', 'daiying.qi', 'https://github.com/SoftwareKing/Moss.git', '房XX', 'moss-sample-2.1.x', '2', '2');
+INSERT INTO `t_app` VALUES
+('1', 'halo-moss', 'halo-moss', '许进', 'xujin', 'halo', 'Halo', '', '2019-02-27 02:23:42', '2019-04-21 10:15:04', '0', '2', '1', '韩令三', 'lingshan.han', 'https://github.com/SoftwareKing/Moss.git', 'XX', 'halo-moss', '2', '2'),
+('2', 'moss-sample-1.5.x', 'moss-sample-1.5.x', '杜为极', 'weiji.du', 'BKCASHIER', 'MOSS', '', '2019-02-27 02:23:42', '2019-04-21 10:15:27', '0', '2', '1', '叶张', 'dingf.ye001', 'https://github.com/SoftwareKing/Moss.git', '金融XX', 'moss-sample-1.5.x', '1', '1'),
+('3', 'moss-sample-2.1.x', 'moss-sample-2.1.x', '许进', 'guojian.li', 'MOSS', 'MOSS', '', '2019-02-27 02:23:42', '2019-04-21 10:15:22', '0', '2', '1', '齐思宇', 'daiying.qi', 'https://github.com/SoftwareKing/Moss.git', '房XX', 'moss-sample-2.1.x', '2', '2');
 COMMIT;
 
 -- ----------------------------
