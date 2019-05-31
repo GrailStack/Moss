@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 the original author or authors.
+ * Copyright 2014-2019 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package de.codecentric.boot.admin.server.services;
 import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
+import reactor.retry.Retry;
 
 import java.util.logging.Level;
 import javax.annotation.Nullable;
@@ -40,12 +41,15 @@ public abstract class AbstractEventHandler<T extends InstanceEvent> {
 
     public void start() {
         subscription = Flux.from(publisher)
-                           .log(log.getName(), Level.FINEST)
-                           .doOnSubscribe(s -> log.debug("Subscribed to {} events", eventType))
-                           .ofType(eventType)
-                           .cast(eventType).transform(this::handle)
-                           .onErrorContinue((ex, value) -> log.warn("Unexpected error while handling {}", value, ex))
-                           .subscribe();
+                .log(log.getName(), Level.FINEST)
+                .doOnSubscribe(s -> log.debug("Subscribed to {} events", eventType))
+                .ofType(eventType)
+                .cast(eventType)
+                .transform(this::handle)
+                .retryWhen(Retry.any()
+                        .retryMax(Long.MAX_VALUE)
+                        .doOnRetry(ctx -> log.warn("Unexpected error", ctx.exception())))
+                .subscribe();
     }
 
     protected abstract Publisher<Void> handle(Flux<T> publisher);

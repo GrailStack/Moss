@@ -27,6 +27,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
+import reactor.retry.Retry;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -73,14 +74,16 @@ public class RemindingNotifier extends AbstractEventNotifier {
     public void start() {
         Scheduler scheduler = Schedulers.newSingle("reminders");
         this.subscription = Flux.interval(this.checkReminderInverval, scheduler)
-                                .log(log.getName(), Level.FINEST)
-                                .doOnSubscribe(s -> log.debug("Started reminders"))
-                                .flatMap(i -> this.sendReminders())
-                                .onErrorContinue((ex, value) -> log.warn(
-                                    "Unexpected error while sending reminders",
-                                    ex
-                                )).doFinally(s -> scheduler.dispose())
-                                .subscribe();
+                .log(log.getName(), Level.FINEST)
+                .doOnSubscribe(s -> log.debug("Started reminders"))
+                .flatMap(i -> this.sendReminders())
+                .retryWhen(Retry.any()
+                        .retryMax(Long.MAX_VALUE)
+                        .doOnRetry(ctx -> log.warn("Unexpected error when sending reminders",
+                                ctx.exception()
+                        )))
+                .doFinally(s -> scheduler.dispose())
+                .subscribe();
     }
 
     public void stop() {
@@ -94,16 +97,17 @@ public class RemindingNotifier extends AbstractEventNotifier {
         Instant now = Instant.now();
 
         return Flux.fromIterable(this.reminders.values())
-                   .filter(reminder -> reminder.getLastNotification().plus(reminderPeriod).isBefore(now))
-                   .flatMap(reminder -> delegate.notify(reminder.getEvent())
-                                                .doOnSuccess(signal -> reminder.setLastNotification(now)))
-                   .then();
+                .filter(reminder -> reminder.getLastNotification().plus(reminderPeriod).isBefore(now))
+                .flatMap(reminder -> delegate.notify(reminder.getEvent())
+                        .doOnSuccess(signal -> reminder.setLastNotification(now)))
+                .then();
     }
 
     protected boolean shouldStartReminder(InstanceEvent event) {
         if (event instanceof InstanceStatusChangedEvent) {
             return Arrays.binarySearch(reminderStatuses,
-                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus()) >= 0;
+                    ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus()
+            ) >= 0;
         }
         return false;
     }
@@ -114,7 +118,8 @@ public class RemindingNotifier extends AbstractEventNotifier {
         }
         if (event instanceof InstanceStatusChangedEvent) {
             return Arrays.binarySearch(reminderStatuses,
-                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus()) < 0;
+                    ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus()
+            ) < 0;
         }
         return false;
     }
