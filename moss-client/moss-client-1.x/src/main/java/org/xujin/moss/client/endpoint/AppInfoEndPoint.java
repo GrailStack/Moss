@@ -1,15 +1,14 @@
 package org.xujin.moss.client.endpoint;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.xujin.moss.client.endpoint.dependency.analyzer.JarDependencies;
 import org.xujin.moss.client.utils.Analyzer;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.web.annotation.RestControllerEndpoint;
+import org.springframework.boot.actuate.endpoint.mvc.AbstractNamedMvcEndpoint;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -19,9 +18,11 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
-@RestControllerEndpoint(id = "appinfo")
-@Slf4j
-public class AppInfoEndPoint {
+/**
+ * 应用用了哪些版本
+ * @author xujin
+ */
+public class AppInfoEndPoint extends AbstractNamedMvcEndpoint {
 
     private static final Log logger = LogFactory.getLog(AppInfoEndPoint.class);
 
@@ -30,8 +31,25 @@ public class AppInfoEndPoint {
 
     private Map<String, Object> cache = new ConcurrentHashMap<>();
 
-    @RequestMapping(method = {RequestMethod.GET})
-    public Object get() {
+    public AppInfoEndPoint() {
+        super("appinfo","/appinfo", true);
+    }
+
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isSensitive() {
+        return true;
+    }
+
+
+    @GetMapping
+    @ResponseBody
+    public Object invoke() {
         return cache;
     }
 
@@ -54,7 +72,7 @@ public class AppInfoEndPoint {
                 List<HashMap<String, String>> list = new ArrayList<>();
                 dependencies.getPomInfos().forEach(p -> {
                     if (p.getGroupId().equals("org.springframework.cloud")
-                            && p.getArtifactId().startsWith("spring-cloud")) {
+                        && p.getArtifactId().startsWith("spring-cloud")) {
                         HashMap<String, String> kv = new HashMap<>();
                         kv.put(p.getArtifactId(), p.getVersion());
                         list.add(kv);

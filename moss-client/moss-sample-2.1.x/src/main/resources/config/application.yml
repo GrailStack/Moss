@@ -1,0 +1,12 @@
+systemInfo:
+  appName: @project.artifactId@
+server:
+  port: 8082
+logging:
+  registry:
+    files:
+    - name: tomcat_stdout
+      description: 标准输出
+      path: ./spring.log
+    - name: gclog
+      path: ${user.home}/logs/sys/${spring.application.name}/gc.log

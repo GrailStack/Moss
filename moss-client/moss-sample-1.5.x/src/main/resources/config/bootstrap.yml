@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: @project.artifactId@
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
