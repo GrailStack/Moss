@@ -30,7 +30,7 @@ public class LogFileEndPoint extends AbstractNamedMvcEndpoint {
                 .collect(Collectors.toSet());
     }
 
-    @GetMapping(value = "/{requiredLogFileName}", produces = "text/plain")
+    @GetMapping(value = "/{requiredLogFileName:.*}", produces = "text/plain")
     @ResponseBody
     public Resource retriveLogfile(@PathVariable String requiredLogFileName) throws FileNotFoundException {
 
