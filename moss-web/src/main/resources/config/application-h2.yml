@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:moss;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
+    username: root
+    password: dpjA8Z6XPXbvos
+    driver-class-name: org.h2.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    schema: classpath:db/h2/moss-init.sql
+  h2:
+    console:
+      enabled: true

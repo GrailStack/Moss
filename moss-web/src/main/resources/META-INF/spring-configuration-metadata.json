@@ -5,7 +5,7 @@
     {
       "name": "logging.moss.path",
       "type": "java.lang.String",
-      "defaultValue":"/opt/app/logs",
+      "defaultValue":"~/logs",
       "description":"logback files prefix."
     }
   ]

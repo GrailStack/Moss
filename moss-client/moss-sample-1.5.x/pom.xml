@@ -10,12 +10,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.7.RELEASE</version>
+    <version>1.5.12.RELEASE</version>
   </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
+    <start-class>org.xujin.moss.sample.Sb15XAppliaction</start-class>
   </properties>
 
   <dependencies>
@@ -34,16 +35,6 @@
      
      <!-- 集成Spring Boot Actuator -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <!-- 加入Spring Cloud Eureka的支持 -->
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-eureka</artifactId>
-    </dependency>
-    
-    <dependency>
 	   <groupId>org.projectlombok</groupId>
 	   <artifactId>lombok</artifactId>
 	    <version>1.16.6</version>
@@ -58,7 +49,7 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Edgware.RELEASE</version>
+        <version>Edgware.SR4</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -69,25 +60,33 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>pl.project13.maven</groupId>
-        <artifactId>git-commit-id-plugin</artifactId>
-        <version>2.1.15</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>1.5.12.RELEASE</version>
+        <configuration>
+          <mainClass>${start-class}</mainClass>
+          <layout>WAR</layout>
+        </configuration>
         <executions>
           <execution>
             <goals>
-              <goal>revision</goal>
+              <goal>repackage</goal>
+              <goal>build-info</goal>
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-        </configuration>
       </plugin>
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
   
 </project>

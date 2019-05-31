@@ -53,10 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel getUserByUserNameAndPassWord(String userName, String password) {
         User user=userMapper.findUserByUserNameAndPassword(userName,MD5.md5(password));
-        if(null==user){
-            return null;
-        }
-        return BeanMapper.map(user,UserModel.class);
+        return null == user ? null : BeanMapper.map(user,UserModel.class);
     }
 
     @Override

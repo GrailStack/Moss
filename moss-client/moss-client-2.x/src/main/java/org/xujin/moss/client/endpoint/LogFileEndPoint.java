@@ -1,101 +1,54 @@
 package org.xujin.moss.client.endpoint;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.web.annotation.RestControllerEndpoint;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.annotation.Selector;
+import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.PropertyResolver;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@ConfigurationProperties(prefix = "endpoints.log-file-type")
-@RestControllerEndpoint(id = "logFileType")
+@WebEndpoint(id = "logfile")
 public class LogFileEndPoint {
 
-    private static class Handler extends ResourceHttpRequestHandler {
+    private LogFileRegistry registry;
 
-        private final Resource resource;
-
-        Handler(Resource resource, ServletContext servletContext) {
-            this.resource = resource;
-            getLocations().add(resource);
-            try {
-                setServletContext(servletContext);
-                afterPropertiesSet();
-            } catch (Exception ex) {
-                throw new IllegalStateException(ex);
-            }
-        }
-
-        @Override
-        protected MediaType getMediaType(HttpServletRequest request, Resource resource) {
-            return MediaType.TEXT_PLAIN;
-        }
-
-        @Override
-        protected Resource getResource(HttpServletRequest request) throws IOException {
-            return this.resource;
-        }
-
-        @Override
-        protected void initAllowedLocations() {
-            this.getLocations().clear();
-        }
+    public LogFileEndPoint(Environment environment, LogFileRegistry registry) {
+        this.registry = registry;
+    }
+    @ReadOperation
+    @ResponseBody
+    public ListNamesResponse listNames() {
+        return new ListNamesResponse(collectNames(this.registry));
+    }
+    private Set<String> collectNames(LogFileRegistry registry) {
+        return registry.getFiles()
+                .stream()
+                .map(logFile -> logFile.getName())
+                .collect(Collectors.toSet());
     }
 
-    public static final String basicPath = "/opt/app/logs";
+    @ReadOperation
+    @ResponseBody
+    public Resource retriveLogfile(@Selector String requiredLogFileName) throws FileNotFoundException {
 
-    public static final String logFile_type_info = "info";
+        return this.registry.getFile(requiredLogFileName);
+    }
 
-    public static final String logFile_type_error = "error";
+    public static final class ListNamesResponse {
 
-    private static final Log logger = LogFactory.getLog(LogFileEndPoint.class);
+        private final Set<String> names;
 
-    public static String getByCustomLogType(PropertyResolver propertyResolver, String path, String type) {
-        String fileName = propertyResolver.getProperty("spring.application.name");
-        if (type.equals(logFile_type_info)) {
-            fileName = fileName + "_info.log";
-        } else if (type.equals(logFile_type_error)) {
-            fileName = fileName + "_error.log";
+        ListNamesResponse(Set<String> names) {
+            this.names = names;
         }
-        return path + "/" + fileName;
-    }
 
-    @Autowired
-    private Environment environment;
-
-    public LogFileEndPoint() {
-    }
-
-    private Resource getLogFileResource(String logType) {
-        String LogFileName = getByCustomLogType(environment, basicPath, logType);
-        return new FileSystemResource(LogFileName);
-    }
-
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
-    public void invoke(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String logType = request.getParameter("logType");
-        Resource resource = getLogFileResource(logType);
-        if (resource != null && !resource.exists()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Log file '" + resource + "' does not exist");
-            }
-            resource = null;
+        public Set<String> getNames() {
+            return this.names;
         }
-        LogFileEndPoint.Handler handler = new LogFileEndPoint.Handler(resource, request.getServletContext());
-        handler.handleRequest(request, response);
-    }
 
+    }
 }

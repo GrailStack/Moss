@@ -57,13 +57,13 @@ public class LdapRealm extends AbstractLdapRealm {
         String token = (String) authenticationToken.getCredentials();
         // 解密获得username，用于和数据库进行对比
         String username = JwtUtil.getUsername(token);
-        String password = JwtUtil.getPassWord(token);
-        if (null==username  || !JwtUtil.verify(token, username,password)) {
+
+        if (null==username  || !JwtUtil.verify(token, username)) {
             throw new AuthenticationException("token认证失败！");
         }
         LdapContext ctx = null;
         try {
-            ctx = ldapContextFactory.getLdapContext(username, password);
+            ctx = ldapContextFactory.getLdapContext(username, null);
         } catch (Throwable e) {
             LOGGER.error(e.getMessage(), e);
             return null;
