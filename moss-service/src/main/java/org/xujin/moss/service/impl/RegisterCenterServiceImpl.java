@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import de.codecentric.boot.admin.server.cloud.extension.MultRegisterCenterServerMgmtConfig;
+// import de.codecentric.boot.admin.server.cloud.extension.MultRegisterCenterServerMgmtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +24,8 @@ import java.util.List;
 @Service
 public class RegisterCenterServiceImpl implements RegisterCenterService {
 
-    @Autowired
-    private MultRegisterCenterServerMgmtConfig multEurekaServerMgmtConfig;
+//    @Autowired
+//    private MultRegisterCenterServerMgmtConfig multEurekaServerMgmtConfig;
 
     @Autowired
     private RegisterCenterMapper registerCenterMapper;
@@ -41,10 +41,10 @@ public class RegisterCenterServiceImpl implements RegisterCenterService {
         model.setGmtCreate(new Timestamp(System.currentTimeMillis()));
         model.setGmtModified(new Timestamp(System.currentTimeMillis()));
         registerCenterMapper.insert(BeanMapper.map(model, RegisterCenter.class));
-        //当状态是启用的时候动态添加
-        if (Constants.REGISTER_CENTER_ENABLE==model.getStatus()) {
-            multEurekaServerMgmtConfig.addEureka(model.getCode(),model.getUrl());
-        }
+//        //当状态是启用的时候动态添加
+//        if (Constants.REGISTER_CENTER_ENABLE==model.getStatus()) {
+//            multEurekaServerMgmtConfig.addEureka(model.getCode(),model.getUrl());
+//        }
         return ResultData.builder().build();
     }
 
@@ -80,12 +80,12 @@ public class RegisterCenterServiceImpl implements RegisterCenterService {
         }
         registerCenter.setGmtModified(new Timestamp(System.currentTimeMillis()));
         registerCenterMapper.updateById(BeanMapper.map(model,RegisterCenter.class));
-        //当状态是启用的时候动态添加
-        if (Constants.REGISTER_CENTER_ENABLE==model.getStatus()) {
-            multEurekaServerMgmtConfig.addEureka(model.getCode(),model.getUrl());
-        }else{
-            multEurekaServerMgmtConfig.revomeEureka(registerCenter.getCode());
-        }
+//        //当状态是启用的时候动态添加
+//        if (Constants.REGISTER_CENTER_ENABLE==model.getStatus()) {
+//            multEurekaServerMgmtConfig.addEureka(model.getCode(),model.getUrl());
+//        }else{
+//            multEurekaServerMgmtConfig.revomeEureka(registerCenter.getCode());
+//        }
 
     }
 
@@ -98,7 +98,7 @@ public class RegisterCenterServiceImpl implements RegisterCenterService {
         }
         registerCenter.setIsDeleted(Constants.IS_DELETE_TRUE);
         registerCenterMapper.updateById(registerCenter);
-        multEurekaServerMgmtConfig.revomeEureka(registerCenter.getCode());
+        // multEurekaServerMgmtConfig.revomeEureka(registerCenter.getCode());
 
     }
 

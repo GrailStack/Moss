@@ -11,7 +11,7 @@
     <artifactId>moss-service</artifactId>
 
     <name>moss-service</name>
-
+    
     <dependencies>
 
         <dependency>
@@ -68,9 +68,14 @@
 
         <dependency>
             <groupId>org.xujin.moss</groupId>
-            <artifactId>moss-adapter-multi-eureka</artifactId>
+            <artifactId>moss-adapter-multi-zookeeper</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.xujin.moss</groupId>-->
+            <!--<artifactId>moss-adapter-multi-eureka</artifactId>-->
+            <!--<version>1.0.0.RELEASE</version>-->
+        <!--</dependency>-->
     </dependencies>
 
 </project>
