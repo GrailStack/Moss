@@ -5,12 +5,10 @@ import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.xujin.moss.security.jwt.JwtFilter;
 import org.xujin.moss.security.jwt.ResourceCheckFilter;
 import org.xujin.moss.security.shiro.DBRealm;
-import org.xujin.moss.security.shiro.LdapRealm;
 import com.google.common.collect.Lists;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
@@ -60,7 +58,7 @@ public class ShiroAuthConfig {
     }
 
     @Bean("securityManager")
-    public DefaultWebSecurityManager getManager(@Autowired UserService userService) {
+    public DefaultWebSecurityManager getManager(UserService userService) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         List<Realm> realms = Lists.newArrayList();
         realms.add(new DBRealm(userService));

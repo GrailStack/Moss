@@ -1,5 +1,9 @@
 package org.xujin.moss.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.xujin.moss.security.jwt.JwtUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,33 +16,18 @@ import javax.servlet.http.HttpServletResponse;
  * BaseController用于统一获取信息
  */
 public class BaseController {
+    @Autowired
+    HttpServletRequest httpServletRequest;
 
-    private static final Log logger = LogFactory.getLog(BaseController.class);
-
-    protected static final ThreadLocal<HttpServletRequest> requests = new ThreadLocal();
-    protected static final ThreadLocal<HttpServletResponse> responses = new ThreadLocal();
-
-    public BaseController() {
-    }
-
-    @ModelAttribute
-    public void init(HttpServletRequest request, HttpServletResponse response) {
-        requests.set(request);
-        responses.set(response);
-    }
-
-    public HttpServletRequest getRequest() {
-        return (HttpServletRequest)requests.get();
-    }
 
    public String getUserNameByToken() {
-       HttpServletRequest req=(HttpServletRequest)requests.get();
+       HttpServletRequest req=(HttpServletRequest)httpServletRequest;
        String token = req.getHeader("Token");
-       return  JwtUtil.getUsername(token);
+       return JwtUtil.getUsername(token);
    }
 
    public String getRegisterSource() {
-        HttpServletRequest req=(HttpServletRequest)requests.get();
+        HttpServletRequest req=(HttpServletRequest)httpServletRequest;
         String registerSource = req.getHeader("registerSource");
         return registerSource;
     }
