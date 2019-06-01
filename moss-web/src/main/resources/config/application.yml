@@ -50,4 +50,4 @@ moss.skywalking.url: http://localhost:8083/
 
 logging:
   moss:
-    path: ~/logs
+    path: logs
