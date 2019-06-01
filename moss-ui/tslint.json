@@ -1,0 +1,23 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint-react", "tslint-eslint-rules", "tslint-config-prettier"],
+  "rules": {
+    "eofline": true,
+    "no-construct": true,
+    "no-reference": true,
+    "jsx-no-multiline-js": false,
+    "no-object-literal-type-assertion": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "no-console": false,
+    "curly": true,
+    "ordered-imports": true,
+    "object-literal-sort-keys": false,
+    "variable-name": [true, "ban-keywords", "allow-leading-underscore"],
+    "no-unsafe-finally": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "triple-equals": true
+  }
+}

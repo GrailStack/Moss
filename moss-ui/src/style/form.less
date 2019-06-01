@@ -1,0 +1,148 @@
+@import (reference) './constants';
+@margin: 0.32rem;
+
+.form {
+  label {
+    color: @link-color;
+  }
+
+  .with-sub {
+    position: relative;
+
+    .input-sub {
+      position: absolute;
+      top: 0;
+      right: 0.2rem;
+    }
+  }
+
+  .form-control {
+    margin-bottom: @margin;
+  }
+
+  .form-control:last-child {
+    margin-bottom: 0;
+  }
+
+  .flex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    & > * {
+      flex-grow: 1;
+      text-align: center;
+    }
+  }
+
+  .form-checkbox {
+    position: relative;
+
+    [type='checkbox'],
+    [type='radio'] {
+      position: static;
+      z-index: 1;
+      width: 0.2rem;
+      height: 0.2rem;
+      vertical-align: text-bottom;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    label {
+      padding-left: 1em;
+    }
+
+    label::before {
+      position: absolute;
+      left: 0;
+      display: inline-block;
+      width: 0.2rem;
+      height: 0.2rem;
+      vertical-align: text-bottom;
+      cursor: pointer;
+      content: '\20';
+      border-radius: 100%;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    [type='checkbox']:checked + label::before,
+    [type='radio']:checked + label::before {
+      background-color: @color-blue;
+      border-color: 1px solid @color-blue;
+      border-radius: 100%;
+    }
+
+    [type='checkbox']:checked + label::after,
+    [type='radio']:checked + label::after {
+      position: absolute;
+      top: 0.06rem;
+      left: 0.05rem;
+      display: inline-block;
+      width: 0.1rem;
+      height: 0.05rem;
+      content: '\20';
+      border-color: @color-white;
+      border-style: solid;
+      border-width: 0 0 2px 2px;
+      transform: rotate(-45deg);
+    }
+  }
+
+  [type='number'],
+  [type='text'],
+  [type='password'] {
+    width: 100%;
+    padding: 0 0 0.14rem;
+    border: none;
+    border-bottom: 1px solid @border-color-base;
+    border-radius: 0;
+    outline: none;
+
+    &::-webkit-input-placeholder {
+      color: @text-color;
+    }
+
+    &.warning {
+      border-bottom-color: @color-red;
+    }
+  }
+
+  .button,
+  button {
+    display: block;
+    width: 100%;
+    height: 0.5rem;
+    font-size: 0.24rem;
+    line-height: 0.5rem;
+    text-align: center;
+    background-image: linear-gradient(to right, #6899f5, #2e6adc);
+    border: none;
+    border-radius: 0.05rem;
+    outline: none;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    &.primary {
+      color: @color-white;
+      background-color: @color-blue;
+    }
+  }
+
+  input:disabled {
+    background: none;
+  }
+}
+
+.login_merchant {
+  /* stylelint-disable-next-line */
+  > .button,
+  button {
+    &.primary {
+      background-color: #2c63ff;
+      background-image: none;
+    }
+  }
+}

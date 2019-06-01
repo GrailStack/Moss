@@ -1,0 +1,95 @@
+@import (reference) '../../style/constants.less';
+@import (reference) '~antd/dist/antd.less';
+
+@nav-header-height: @layout-header-height;
+
+#sider {
+  .logo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: (@menu-collapsed-width - 44px) / 2;
+    overflow: hidden;
+    line-height: @nav-header-height;
+    background: #002140;
+    transition: all 0.3s;
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      padding: 6px 0;
+    }
+
+    .title-container {
+      display: inline-flex;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+
+    .source-select {
+      width: 128px;
+      margin-left: 12px;
+      font-size: 12px;
+      background: transparent;
+
+      .ant-select-selection__rendered {
+        margin: 0;
+      }
+
+      .ant-select-arrow {
+        margin-right: 8px;
+      }
+
+      div,
+      span {
+        color: white;
+        background: transparent;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    img {
+      display: inline-block;
+      flex-shrink: 0;
+      height: 52px;
+      vertical-align: middle;
+    }
+
+    h1 {
+      display: inline-block;
+      margin: 14px 0 0 12px;
+      font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: white;
+      vertical-align: middle;
+    }
+  }
+
+  .ant-menu-root {
+    overflow: auto;
+  }
+
+  .ant-menu {
+    border-right: none;
+  }
+
+  &.ant-layout-sider-collapsed {
+    .logo {
+      border-right-width: 25px;
+      border-left-width: 25px;
+    }
+  }
+}
+
+.ant-menu-submenu-popup {
+  background-color: @menu-bg;
+}
+
+.ant-menu-inline {
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    width: 100%;
+  }
+}

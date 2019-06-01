@@ -1,0 +1,137 @@
+@import (reference) '../../style/constants';
+
+.application-card {
+  position: relative;
+  width: 280px;
+  padding: 20px;
+  background: @color-white;
+  border-radius: 6px;
+
+  .icon-card {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: @primary-color;
+    cursor: pointer;
+
+    &:hover {
+      color: @primary-5;
+    }
+  }
+
+  .meta {
+    height: 64px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    .icon {
+      float: left;
+      width: 64px;
+      height: 64px;
+      margin-right: 16px;
+    }
+
+    .name {
+      overflow: hidden;
+      font-size: 14px;
+      color: @text-color;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .owner {
+      margin-bottom: 2px;
+      font-size: 10px;
+      line-height: 13px;
+      color: fade(@text-color, 40);
+      // span {
+      //   color: rgba(0, 0, 0, 0.65);
+      // }
+    }
+
+    .url {
+      height: 21px;
+      overflow: hidden;
+      font-size: 12px;
+      color: fade(@text-color, 50);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .status {
+    padding: 0;
+    margin-bottom: 0;
+    border: 1px solid @border-color-base;
+    border-radius: 5px 5px 0 0;
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    & > div {
+      position: relative;
+      height: 60px;
+      padding: 8px 0 8px 0;
+      overflow: hidden;
+      font-weight: 700;
+      text-align: right;
+      text-overflow: ellipsis;
+      list-style: none;
+      border-right: 1px solid @border-color-base;
+
+      span {
+        display: block;
+        font-size: 10px;
+        font-weight: normal;
+        line-height: 10px;
+        color: @text-color;
+        text-align: center;
+      }
+
+      &:last-child {
+        border: none;
+      }
+
+      .statusValue {
+        color: @color-blue;
+      }
+
+      .version {
+        color: @color-orange;
+        border: none;
+      }
+    }
+  }
+
+  .charts {
+    padding: 0;
+    margin: 0;
+
+    & > li {
+      height: 45px;
+      margin-top: 8px;
+      list-style: none;
+      border: 1px solid @border-color-base;
+      border-radius: 5px;
+
+      &:first-child {
+        margin-top: 0;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+      }
+    }
+  }
+
+  .switch {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    margin-left: -7px;
+  }
+}
