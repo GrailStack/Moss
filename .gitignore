@@ -17,6 +17,7 @@ target
 *.ipr
 
 moss-ui/node_modules/
+./logs
 
 ### BUILD ###
 nbproject/private/
