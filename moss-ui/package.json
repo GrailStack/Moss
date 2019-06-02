@@ -3,7 +3,7 @@
   "scripts": {
     "6": "node ./script.js",
     "start": "cross-env UMI_ENV=dev umi dev",
-    "build": "cross-env UMI_ENV=prod umi build",
+    "build": "cross-env UMI_ENV=prod umi build && cp -a dist/* ../moss-web/src/main/resources/static",
     "serve": "serve ./dist",
     "test": "umi test",
     "lint:es": "eslint --ext .js src mock tests",
