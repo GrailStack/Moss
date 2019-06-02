@@ -79,10 +79,13 @@ public class MossInstanceDiscoveryListener {
 
     @EventListener
     public void onInstanceRegistered(InstanceRegisteredEvent<?> event) {
-        MossEurekaAutoServiceRegistration eurekaAutoServiceRegistration = (MossEurekaAutoServiceRegistration) event.getSource();
-        cloudEurekaClient.set(eurekaAutoServiceRegistration.getRegistration().getEurekaClient());
-        discover();
-        cloudEurekaClient.remove();
+        Object source = event.getSource();
+        if(source instanceof MossEurekaAutoServiceRegistration) {
+            MossEurekaAutoServiceRegistration eurekaAutoServiceRegistration = (MossEurekaAutoServiceRegistration)source ;
+            cloudEurekaClient.set(eurekaAutoServiceRegistration.getRegistration().getEurekaClient());
+            discover();
+            cloudEurekaClient.remove();
+        }
     }
 
     @EventListener
