@@ -74,6 +74,7 @@ Roadmap 时间点：
 |    SoftwareKing  | Owner | https://github.com/SoftwareKing|
 |   iShawnWang  | 前端开发 | https://github.com/iShawnWang |
 | homeant | 前后台开发 | https://github.com/homeant |
+| VancySavoki | 后端开发 | https://github.com/VancySavoki |
 
 ### 1.3 Moss的功能
 

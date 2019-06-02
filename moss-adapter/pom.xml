@@ -13,7 +13,7 @@
     <version>1.0.0.RELEASE</version>
     <packaging>pom</packaging>
     <modules>
-        <!--<module>moss-adapter-single-eureka</module>-->
+        <module>moss-adapter-single-eureka</module>
         <module>moss-adapter-single-nacos</module>
         <module>moss-adapter-multi-eureka</module>
         <module>moss-adapter-multi-zookeeper</module>

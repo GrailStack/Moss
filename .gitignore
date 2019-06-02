@@ -17,6 +17,7 @@ target
 *.ipr
 
 moss-ui/node_modules/
+logs
 
 ### BUILD ###
 nbproject/private/
@@ -30,3 +31,22 @@ out/
 /*/target
 target
 
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+moss-ui/node_modules
+moss-ui/npm-debug.log*
+moss-ui/yarn-error.log
+moss-uiyarn.lock
+moss-ui/package-lock.json
+
+# production
+moss-ui/dist
+dist.zip
+
+# misc
+.DS_Store
+
+# umi
+.umi
+.umi-production

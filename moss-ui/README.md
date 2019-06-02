@@ -18,6 +18,13 @@ UI : [React](https://reactjs.org/) [Less](http://lesscss.org/) [Ant design](http
 
 # Getting Started
 
+本地开发  
+`npm run start`
+
+自动打包  
+`npm run build`
+
+提示命令行
 `npm run 6`
 
 # 相关
