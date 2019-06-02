@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" >
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
-	<springProperty scope="context" name="logDir" source="logging.moss.path" defaultValue="~/logs"/>
+	<springProperty scope="context" name="logDir" source="logging.moss.path" defaultValue="logs"/>
 	<springProperty scope="context" name="app.name" source="spring.application.name"/>
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
@@ -22,7 +22,7 @@
 			<maxFileSize>10MB</maxFileSize>
 		</rollingPolicy>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
 			<charset>UTF-8</charset>
 		</encoder>
 	</appender>
@@ -41,7 +41,7 @@
 			<maxFileSize>10MB</maxFileSize>
 		</rollingPolicy>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
 			<charset>UTF-8</charset>
 		</encoder>
 	</appender>
