@@ -1,0 +1,7 @@
+eureka:
+  client:
+    filterOnlyUpInstances: false
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://eureka.springcloud.cn/eureka/
+    reference: META-INF/reference.json # optional

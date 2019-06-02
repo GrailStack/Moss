@@ -1,4 +1,4 @@
-package org.xujin.moss.client.config;
+package org.xujin.moss.client.zookeeper;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.x.discovery.ServiceDiscovery;
@@ -8,16 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryProperties;
 import org.springframework.cloud.zookeeper.discovery.ZookeeperInstance;
 import org.springframework.cloud.zookeeper.support.DefaultServiceDiscoveryCustomizer;
+import org.xujin.moss.client.config.MetaDataProvider;
 
 import java.util.Map;
 
-public class AutoRegistrationCustomizer extends DefaultServiceDiscoveryCustomizer {
+public class ZooKeeperAutoRegistrationCustomizer extends DefaultServiceDiscoveryCustomizer {
     private static final String MANAGEMENT_PORT = "management.port";
     private static final String PID = "pid";
     @Autowired
     MetaDataProvider metaDataProvider;
 
-    public AutoRegistrationCustomizer(CuratorFramework curator, ZookeeperDiscoveryProperties properties, InstanceSerializer<ZookeeperInstance> serializer) {
+    public ZooKeeperAutoRegistrationCustomizer(CuratorFramework curator, ZookeeperDiscoveryProperties properties, InstanceSerializer<ZookeeperInstance> serializer) {
         super(curator, properties, serializer);
     }
 

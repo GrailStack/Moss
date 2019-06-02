@@ -40,7 +40,7 @@ public class CommonServiceImpl implements CommonService {
      */
     @Override
     public AppModel findAppExtendInfo(String appId) {
-        List<AppModel> list= appService.findAllByParamter(appId,"","");
+        List<AppModel> list= appService.findAllByParamter(appId.toLowerCase(),"","");
         if(null==list||list.size()==0){
            return null;
         }

@@ -1,4 +1,4 @@
-package de.codecentric.boot.admin.server.cloud.extension;
+package org.moss.registry.adapter;
 
 import java.util.Map;
 

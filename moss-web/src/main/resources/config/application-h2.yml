@@ -13,7 +13,7 @@ spring:
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
     validationQuery: select 'x'
-    testWhileIdle: true
+    testWhileIdle: false
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true

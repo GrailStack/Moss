@@ -20,9 +20,10 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>[1.5.7.RELEASE,2.1.4.RELEASE]</version>
+            <artifactId>spring-boot</artifactId>
+            <version>1.5.12.RELEASE</version>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -51,7 +52,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>27.0.1-jre</version>
+            <version>20.0</version>
         </dependency>
         <dependency>
             <groupId>commons-collections</groupId>

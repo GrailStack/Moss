@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: h2,zk
+    active: h2, @discovery.type@
   application:
     name: halo-moss
   boot:
