@@ -17,12 +17,4 @@ spring:
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true
-<<<<<<< HEAD
     maxOpenPreparedStatements: 20
-=======
-<<<<<<< HEAD
-    maxOpenPreparedStatements: 20
-=======
-    maxOpenPreparedStatements: 20
->>>>>>> Update default config
->>>>>>> 91b037d... Update default config
