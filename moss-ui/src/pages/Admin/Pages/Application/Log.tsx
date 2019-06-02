@@ -5,7 +5,7 @@ import applicationModel from '@/models/application/model'
 import applicationService from '@/models/application/service'
 import { connect } from '@/util/store'
 import { qsParse, qsStringify } from '@/util'
-import { Button, Col, Icon, Input, Layout, Pagination, Row } from 'antd'
+import { Button, Radio, Col, Icon, Input, Layout, Pagination, Row } from 'antd'
 import React from 'react'
 import { RouteComponentProps, withRouter } from 'react-router'
 import AppTbs from '@/components/appTbs'
@@ -53,31 +53,21 @@ class Log extends React.Component<RouteComponentProps<{ id: string }> & ILogProp
           <Content>
             <Header className="operation">
               <Row>
-                <Col span={2}>
-                  <Button type="primary" onClick={this.getLogInfo(this.props.match.params.id)}>
-                    <Icon type="loading-3-quarters" /> 刷新
-                  </Button>
-                </Col>
-                <Col span={5}>
+                <Col span={10}>
                   <Search
                     placeholder="input search text"
                     onSearch={this.logSearch()}
-                    style={{ width: 200 }}
                   />
                 </Col>
-                <Col span={3}>
-                  <Button type="primary" onClick={this.getSort('ALL')}>
-                    <Icon type="appstore" /> ALL
-                  </Button>
-                </Col>
-                <Col span={3}>
-                  <Button type="primary" onClick={this.getSort('CLASS')}>
-                    <Icon type="border" /> CLASS
-                  </Button>
-                </Col>
-                <Col span={3}>
-                  <Button type="primary" onClick={this.getSort('Configured')}>
-                    <Icon type="setting" /> Configured
+
+                <Col span={14}>
+                  <Radio.Group onChange={e => this.getSort(e.target.value)} defaultValue='ALL'>
+                    <Radio.Button value="ALL"><Icon type="appstore" /> ALL</Radio.Button>
+                    <Radio.Button value="CLASS"><Icon type="border" /> CLASS</Radio.Button>
+                    <Radio.Button value="Configured"><Icon type="setting" /> Configured</Radio.Button>
+                  </Radio.Group>
+                  <Button type="primary" onClick={this.getLogInfo(this.props.match.params.id)}>
+                    <Icon type="loading-3-quarters" /> 刷新
                   </Button>
                 </Col>
               </Row>
@@ -224,8 +214,8 @@ class Log extends React.Component<RouteComponentProps<{ id: string }> & ILogProp
   }
 
   // ALL
-  private getSort = (num: any) => () => {
-    const { pathname } = this.props.location
+  private getSort (num: any) {
+    const { pathname } = this.props.location;
     this.props.history.push(`${pathname}?pageNo=1&status=${num}`)
   }
 

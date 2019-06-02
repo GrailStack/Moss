@@ -22,8 +22,13 @@ interface ILogDelProps {
 }
 
 interface ILogDelState {
-  selectValue: string
-  logRequestOffset: number
+  defaultValue: string,
+  selectValue: string,
+  logRequestOffset: number,
+  fileTypes: []
+}
+interface ILogfileType {
+  names: [];
 }
 
 class LogDel extends React.Component<
@@ -31,31 +36,21 @@ class LogDel extends React.Component<
   ILogDelState
 > {
   public state: ILogDelState = {
-    selectValue: 'info',
+    defaultValue: '',
+    selectValue: '',
     logRequestOffset: 0,
+    fileTypes: []
   }
 
   private timer?: NodeJS.Timer
   public componentDidMount() {
-    this.getLogDel(this.props.match.params.id, this.state.selectValue)().then(() => {
-      this.timer = setInterval(() => {
-        const { logRequestOffset, selectValue } = this.state
-        applicationService
-          .fetchApplicationModifyLogDel(
-            this.props.match.params.id,
-            selectValue,
-            logRequestOffset,
-            false
-          )
-          .then(resp => {
-            this.setState({
-              logRequestOffset: isNaN(logRequestOffset)
-                ? 0
-                : logRequestOffset + resp.request.response.length,
-            })
-          })
-      }, 4000)
-    })
+    applicationService
+      .fetchApplicationLogfileType(this.props.match.params.id).then(response => {
+        const fileType: ILogfileType = (response.data);
+        this.setState({
+          fileTypes: fileType.names
+        });
+      });
   }
 
   public componentWillUnmount() {
@@ -80,25 +75,24 @@ class LogDel extends React.Component<
         </Row>
         <Layout className="page logDel">
           <Row>
-            <Col span={12}>
+            <Col span={24}>
               <PageTitle
                 name="日志"
-                info="实时获取应用的info日志或Error日志"
+                info="实时获取应用的日志"
                 titleExtra={
-                  <Select defaultValue="info" style={{ width: 160 }} onChange={this.handleChange}>
-                    <Option value="info">查看info日志</Option>
-                    <Option value="error">查看error日志</Option>
+                  <Select defaultValue={this.state.defaultValue} style={{ width: 160 }} onChange={this.handleChange}>
+                    {this.state.fileTypes.map(type => <Option key={type} value={type}>查看{type}日志</Option>)}
                   </Select>
                 }
+                rightPanelExtra={
+                  <Button
+                    type="primary"
+                    onClick={this.getLogDel(this.props.match.params.id, this.state.selectValue)}
+                    style={{ float: 'right', marginTop: '5px', marginLeft: '5px' }}>
+                    <Icon type="loading-3-quarters" /> 刷新
+                </Button>
+                }
               />
-            </Col>
-            <Col span={12}>
-              <Button
-                type="primary"
-                onClick={this.getLogDel(this.props.match.params.id, this.state.selectValue)}
-                style={{ float: 'right', marginTop: '5px', marginLeft: '5px' }}>
-                <Icon type="loading-3-quarters" /> 刷新
-              </Button>
             </Col>
           </Row>
 

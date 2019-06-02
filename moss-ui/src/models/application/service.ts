@@ -100,6 +100,9 @@ const application = {
 
     return fetch({
       method: 'get',
+      headers: {
+        Accept: '*/*'
+      },
       url: `admin/instances/${id}/actuator/health`,
     })
       .then(data => {
@@ -144,6 +147,9 @@ const application = {
 
   fetchApplicationGCLog: (id: string, page = 1, size = 100): Promise<GCLogData> => {
     return fetch({
+      header: {
+        Accept: 'application/json'
+      },
       url: `admin/instances/${id}/actuator/gc?page=${page}&size=${size}`,
     }).then(data => {
       return model.GCLog(data)
@@ -160,7 +166,18 @@ const application = {
       application.fetchApplicationLoggers(id)
     })
   },
-
+  fetchApplicationLogfileType: (
+    id: string,
+    showLoading?: boolean
+  ) => {
+    const requestConf: any = {
+      method: 'get',
+      url: `admin/instances/${id}/actuator/logfile`,
+    }
+    return fetch(requestConf, { fullResponse: true, showLoading }).then((resp: any) => {
+      return resp;
+    })
+  },
   /* 获取日志详情 */
   fetchApplicationModifyLogDel: (
     id: string,
@@ -171,7 +188,7 @@ const application = {
     const requestConf: any = {
       method: 'get',
       responseType: 'Arraybuffer',
-      url: `admin/instances/${id}/actuator/${value}logfile`,
+      url: `admin/instances/${id}/actuator/logfile/${value}`,
     }
 
     if (offset && offset > 0) {
