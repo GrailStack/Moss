@@ -187,7 +187,7 @@ const application = {
   ) => {
     const requestConf: any = {
       method: 'get',
-      responseType: 'Arraybuffer',
+      responseType: 'buffer',
       url: `admin/instances/${id}/actuator/logfile/${value}`,
     }
 

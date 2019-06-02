@@ -119,19 +119,18 @@ class LogDel extends React.Component<
   }
 
   public handleChange = (value: any) => {
-    this.getLogDel(this.props.match.params.id, value)()
+    this.getLogDel(this.props.match.params.id, value, 0)()
     this.setState({
       selectValue: value,
     })
   }
 
-  private getLogDel = (id: any, value: string) => () => {
-    const { logRequestOffset } = this.state
+  private getLogDel = (id: any, value: string, offset: number) => () => {
     return applicationService
-      .fetchApplicationModifyLogDel(id, value, logRequestOffset)
+      .fetchApplicationModifyLogDel(id, value, offset)
       .then(resp => {
         this.setState({
-          logRequestOffset: logRequestOffset + resp.request.response.length,
+          logRequestOffset: offset + resp.request.response.length,
         })
       })
   }
