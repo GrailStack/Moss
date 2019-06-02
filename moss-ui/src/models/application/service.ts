@@ -100,12 +100,9 @@ const application = {
 
     return fetch({
       method: 'get',
-<<<<<<< HEAD
       headers: {
         Accept: '*/*'
       },
-=======
->>>>>>> 07edb6c... add moss-ui
       url: `admin/instances/${id}/actuator/health`,
     })
       .then(data => {
@@ -150,12 +147,9 @@ const application = {
 
   fetchApplicationGCLog: (id: string, page = 1, size = 100): Promise<GCLogData> => {
     return fetch({
-<<<<<<< HEAD
       header: {
         Accept: 'application/json'
       },
-=======
->>>>>>> 07edb6c... add moss-ui
       url: `admin/instances/${id}/actuator/gc?page=${page}&size=${size}`,
     }).then(data => {
       return model.GCLog(data)
@@ -194,11 +188,7 @@ const application = {
     const requestConf: any = {
       method: 'get',
       responseType: 'Arraybuffer',
-<<<<<<< HEAD
       url: `admin/instances/${id}/actuator/logfile/${value}`,
-=======
-      url: `admin/instances/${id}/actuator/${value}logfile`,
->>>>>>> 07edb6c... add moss-ui
     }
 
     if (offset && offset > 0) {
