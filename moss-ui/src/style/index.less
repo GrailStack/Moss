@@ -1,0 +1,45 @@
+@import (reference) './constants.less';
+
+html {
+  font-size: 100px;
+}
+
+body {
+  font-family: @font-family-base;
+  font-size: 0.14rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  -webkit-touch-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(200, 200, 200, 0);
+}
+
+.link,
+a,
+a:hover,
+a:active {
+  text-decoration-line: none;
+}
+
+p {
+  line-height: 1.5;
+}
+
+h1 {
+  margin-bottom: 0.3rem;
+  font-size: 0.24rem;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+pre {
+  user-select: text;
+}
+
+@import './icon/icon';
+@import './form.less';
+@import './antDesignOverride.less';

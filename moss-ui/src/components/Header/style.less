@@ -1,0 +1,76 @@
+@import (reference) '../../style/constants';
+@import (reference) '~antd/dist/antd.less';
+
+#header {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: @layout-header-height;
+  padding: 0;
+  line-height: @layout-header-height;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  .tab-container {
+    display: flex;
+  }
+
+  .collapse-icon-container {
+    height: @layout-header-height;
+    padding: 0 24px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s, padding 0s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.025);
+    }
+  }
+
+  .ant-menu {
+    margin-right: 60px;
+    background: none;
+    border-bottom: none;
+
+    .ant-badge-count {
+      height: 16px;
+      line-height: 16px;
+      border: none;
+    }
+  }
+
+  .user-name {
+    .ant-menu-submenu-title {
+      padding: 0;
+    }
+  }
+
+  .env {
+    padding-right: 0;
+  }
+
+  .avatar-item {
+    padding: 0;
+    margin-right: 8px;
+
+    .ant-avatar {
+      background: @primary-color;
+    }
+  }
+
+  .ant-menu-item,
+  .ant-menu-submenu {
+    border-bottom: none;
+  }
+
+  .anticon {
+    margin-right: 0;
+  }
+}
+
+.ant-breadcrumb {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+}

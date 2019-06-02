@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: h2,zk
+    active: h2, @discovery.type@
   application:
     name: halo-moss
   boot:
@@ -9,8 +9,7 @@ spring:
       probed-endpoints: 
       - "metricsInfo"
       - "metrics:metrics"
-      - "infoLogFile"
-      - "errorLogFile"
+      - "gc"
       - "jardeps"
       - "appinfo"
       - "health"
@@ -36,12 +35,6 @@ spring:
       - "beans"
 server:
   port: 8086
-
-
-info.groupId: @project.groupId@
-info.artifactId: @project.artifactId@
-info.version: @project.version@
-
 #management.jolokia.enabled: true
 management.endpoints.health.show-details: true
 
@@ -50,4 +43,11 @@ moss.skywalking.url: http://localhost:8083/
 
 logging:
   moss:
-    path: ~/logs
+    path: logs
+  registry:
+    files:
+    - name: info
+      description: 标准输出
+      path: logs/${spring.application.name}/info.log
+    - name: gclog
+      path: logs/${spring.application.name}/gc.log

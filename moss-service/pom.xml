@@ -11,7 +11,35 @@
     <artifactId>moss-service</artifactId>
 
     <name>moss-service</name>
-    
+    <profiles>
+        <profile>
+            <id>eureka</id>
+            <dependencies>
+                <dependency>
+                <groupId>org.xujin.moss</groupId>
+                <artifactId>moss-adapter-multi-eureka</artifactId>
+                <version>1.0.0.RELEASE</version>
+                </dependency>
+            </dependencies>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>zookeeper</id>
+            <properties>
+                <discovery.type>zookeeper</discovery.type>
+                <curator.version>2.12.0</curator.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.xujin.moss</groupId>
+                    <artifactId>moss-adapter-multi-zookeeper</artifactId>
+                    <version>1.0.0.RELEASE</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
     <dependencies>
 
         <dependency>
@@ -42,6 +70,11 @@
             <artifactId>moss-service-api</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.xujin.moss</groupId>
+            <artifactId>moss-core</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,16 +99,6 @@
             <version>3.8.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.xujin.moss</groupId>
-            <artifactId>moss-adapter-multi-zookeeper</artifactId>
-            <version>1.0.0.RELEASE</version>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.xujin.moss</groupId>-->
-            <!--<artifactId>moss-adapter-multi-eureka</artifactId>-->
-            <!--<version>1.0.0.RELEASE</version>-->
-        <!--</dependency>-->
     </dependencies>
 
 </project>

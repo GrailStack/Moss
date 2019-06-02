@@ -1,0 +1,113 @@
+@import (reference) '../../../style/constants.less';
+
+@margin-bottom: 15px;
+
+.page {
+  padding: 30px;
+  overflow: auto;
+
+  .ant-advanced-search-form {
+    margin-top: @margin-bottom;
+  }
+
+  .ant-pagination {
+    padding-right: 30px;
+    text-align: center;
+  }
+
+  .ant-steps {
+    margin-bottom: @margin-bottom;
+  }
+}
+
+.page-title {
+  padding: 12px;
+  margin-bottom: 16px;
+  background: white;
+  border-radius: 2px;
+
+  & > * {
+    float: left;
+  }
+
+  & img {
+    width: 64px;
+    height: 64px;
+    margin-right: 24px;
+    vertical-align: middle;
+  }
+
+  .page-title-name {
+    margin-bottom: 0;
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .page-title-info {
+    font-size: 14px;
+    color: @text-color-secondary;
+  }
+
+  .page-title-panel {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .page-title-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .page-title-extra {
+    margin-left: 30px;
+  }
+
+  .page-title-extra > .anticon {
+    margin: 12px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+.page-section {
+  padding: 0 10px;
+  margin-bottom: @margin-bottom;
+
+  & > p {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .page-section-content {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px @shadow-color;
+
+    &.page-section-list .ant-row {
+      line-height: 32px;
+      list-style: none;
+      border-bottom: 1px solid @border-color-base;
+
+      img {
+        width: 24px;
+        height: 24px;
+        margin-right: 5px;
+      }
+
+      .extra {
+        .UP {
+          color: @success-color;
+        }
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.content-board {
+  background: white;
+}

@@ -1,16 +1,11 @@
 package org.xujin.moss.client.config;
 
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.x.discovery.details.InstanceSerializer;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.PublicMetrics;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
-import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryProperties;
-import org.springframework.cloud.zookeeper.discovery.ZookeeperInstance;
-import org.springframework.cloud.zookeeper.support.ServiceDiscoveryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
@@ -74,13 +69,6 @@ public class AdminEndPointConfiguration {
         return new CacheManagerEndpoint();
     }
 
-
-    @Bean
-    public ServiceDiscoveryCustomizer defaultServiceDiscoveryCustomizer(CuratorFramework curator,
-                                                                        ZookeeperDiscoveryProperties properties,
-                                                                        InstanceSerializer<ZookeeperInstance> serializer) {
-        return new AutoRegistrationCustomizer(curator, properties, serializer);
-    }
     @Bean
     public MetaDataProvider metaDataProvider() {
         return new MetaDataProvider();

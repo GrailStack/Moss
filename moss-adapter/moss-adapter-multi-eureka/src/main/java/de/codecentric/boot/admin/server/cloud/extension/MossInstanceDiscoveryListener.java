@@ -12,6 +12,7 @@ import de.codecentric.boot.admin.server.domain.values.Registration;
 import de.codecentric.boot.admin.server.services.InstanceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.event.HeartbeatEvent;
@@ -51,21 +52,24 @@ public class MossInstanceDiscoveryListener {
      * patterns (e.g. "foo*", "*foo", "foo*bar"). Default value is everything
      */
     private Set<String> services = new HashSet<>(Collections.singletonList("*"));
-
+    private MultRegisterCenter multRegisterCenter;
     public MossInstanceDiscoveryListener(
             InstanceRegistry registry,
             InstanceRepository repository) {
         this.registry = registry;
         this.repository = repository;
     }
-
+    @Autowired
+    public void setMultRegisterCenter(MultRegisterCenter multRegisterCenter) {
+        this.multRegisterCenter = multRegisterCenter;
+    }
     /**
      * 应用启动完Ready的事件
      * @param event
      */
     @EventListener
     public void onApplicationReady(ApplicationReadyEvent event) {
-        Map<String, MossEurekaAutoServiceRegistration> map= MultRegisterCenterServerMgmtConfig.getMultRegisterCenter().getMultRegistrationMap();
+        Map<String, MossEurekaAutoServiceRegistration> map= multRegisterCenter.getMultRegistrationMap();
         map.entrySet().forEach(e -> {
             cloudEurekaClient.set(e.getValue().getRegistration().getEurekaClient());
             discover();
@@ -83,7 +87,7 @@ public class MossInstanceDiscoveryListener {
 
     @EventListener
     public void onParentHeartbeat(ParentHeartbeatEvent event) {
-        HeartbeatMonitor heartbeatMonitor= MultRegisterCenterServerMgmtConfig.getHeartbeatMonitorByClient((CloudEurekaClient) event.getSource());
+        HeartbeatMonitor heartbeatMonitor= getHeartbeatMonitorByClient((CloudEurekaClient) event.getSource());
         threadLocalmonitor.set(heartbeatMonitor);
         discoverIfNeeded((CloudEurekaClient) event.getSource(),event.getValue());
         threadLocalmonitor.remove();
@@ -91,7 +95,7 @@ public class MossInstanceDiscoveryListener {
 
     @EventListener
     public void onApplicationEvent(HeartbeatEvent event) {
-        HeartbeatMonitor heartbeatMonitor= MultRegisterCenterServerMgmtConfig.getHeartbeatMonitorByClient((CloudEurekaClient) event.getSource());
+        HeartbeatMonitor heartbeatMonitor= getHeartbeatMonitorByClient((CloudEurekaClient) event.getSource());
         threadLocalmonitor.set(heartbeatMonitor);
         discoverIfNeeded((CloudEurekaClient) event.getSource(),event.getValue());
         threadLocalmonitor.remove();
@@ -153,7 +157,7 @@ public class MossInstanceDiscoveryListener {
     protected Mono<Void> removeStaleInstances(Set<InstanceId> registeredInstanceIds) {
         return repository.findAll()
                 .filter(Instance::isRegistered)
-                .filter(instance -> MultRegisterCenterServerMgmtConfig.getCodeByClient(cloudEurekaClient.get()).
+                .filter(instance -> getCodeByClient(cloudEurekaClient.get()).
                         equals(instance.getRegistration().getSource()))
                 .map(Instance::getId)
                 .filter(id -> !registeredInstanceIds.contains(id))
@@ -162,7 +166,12 @@ public class MossInstanceDiscoveryListener {
                 .then();
     }
 
-
+    private String getCodeByClient(CloudEurekaClient client) {
+        return multRegisterCenter.getMultEurekaCodeMap().get(client);
+    }
+    private HeartbeatMonitor getHeartbeatMonitorByClient(CloudEurekaClient client) {
+        return multRegisterCenter.getMultHeartbeatMonitorMap().get(client);
+    }
 
 
     protected boolean shouldRegisterService(final String serviceId) {
@@ -180,7 +189,7 @@ public class MossInstanceDiscoveryListener {
     protected Mono<InstanceId> registerInstance(ServiceInstance instance) {
         try {
             Registration registration = converter.convert(instance).toBuilder().
-                    source(MultRegisterCenterServerMgmtConfig.getCodeByClient(cloudEurekaClient.get())).build();
+                    source(getCodeByClient(cloudEurekaClient.get())).build();
             log.debug("Registering discovered instance {}", registration);
             return registry.register(registration);
         } catch (Exception ex) {

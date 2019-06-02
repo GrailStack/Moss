@@ -1,0 +1,72 @@
+@import (reference) '../../style/constants.less';
+@import (reference) '~antd/dist/antd.less';
+
+.stage-tab {
+  display: flex;
+  float: left;
+  width: calc(100% - 460px);
+  padding: 0;
+
+  li {
+    position: relative;
+    height: 50px;
+    padding: 0 2em 0 1em;
+    overflow: hidden;
+    line-height: 50px;
+    list-style: none;
+    background-color: @menu-bg;
+
+    &.active {
+      position: relative;
+      // border-radius: 5px 5px 0 0;
+
+      font-weight: 700;
+      color: #fff;
+      background-color: #1890ff;
+
+      a {
+        opacity: 1;
+      }
+
+      i {
+        &:hover {
+          color: @menu-bg;
+        }
+      }
+    }
+
+    a {
+      display: inline-block;
+      max-width: 5em;
+      overflow: hidden;
+      color: #fff;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      opacity: 0.5;
+    }
+
+    &:hover {
+      a {
+        opacity: 1;
+      }
+
+      i {
+        opacity: 1;
+      }
+    }
+
+    i {
+      position: absolute;
+      top: 8px;
+      right: 9px;
+      color: #fff;
+      opacity: 0.5;
+
+      &:hover {
+        color: #1890ff;
+        cursor: pointer;
+      }
+    }
+  }
+}

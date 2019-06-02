@@ -122,9 +122,9 @@ public class StatusUpdater {
 
     protected void logError(Instance instance, Throwable ex) {
         if (instance.getStatusInfo().isOffline()) {
-            log.debug("Couldn't retrieve status for {}", instance, ex);
+            log.debug("Couldn't retrieve status for {}", instance, ex.getMessage());
         } else {
-            log.info("Couldn't retrieve status for {}", instance, ex);
+            log.info("Couldn't retrieve status for {}", instance, ex.getMessage());
         }
     }
 }

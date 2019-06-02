@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.web.server.ManagementServerProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.StringUtils;
@@ -34,7 +35,7 @@ public class MetaDataProvider implements ApplicationContextAware {
     }
     public int getServerPort() {
         return isEmbedded
-                ? serverProperties.getPort()
+                ? serverProperties.getPort() == null ? 8080 : serverProperties.getPort()
                 : tomcatPort;
     }
     public synchronized String getProcessId() {

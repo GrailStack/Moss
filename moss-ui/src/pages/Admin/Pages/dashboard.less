@@ -1,0 +1,170 @@
+@import (reference) '../../../style/constants.less';
+
+.page-dashboard {
+  .top-board-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    .status-board-container {
+      display: flex;
+      flex: 1;
+
+      .board {
+        flex: 1;
+      }
+    }
+
+    .ant-divider {
+      margin: 4px 0;
+    }
+
+    .board-user {
+      display: flex;
+      flex: unset;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+      margin: 0;
+      background: white;
+      border-radius: 12px;
+
+      .user-name {
+        font-size: 32px;
+        font-weight: 700;
+        color: @theme-blue;
+      }
+
+      .info-container {
+        display: flex;
+
+        .character {
+          margin-right: 8px;
+        }
+
+        .department {
+          margin-right: 8px;
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .board {
+      display: flex;
+      margin: 6px;
+      background: white;
+      border-radius: 12px;
+
+      .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        font-size: 40px;
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0 6px;
+
+        .number {
+          font-size: 44px;
+          font-weight: 700;
+          color: @theme-blue;
+        }
+
+        .title {
+          margin: 0 4px;
+          font-size: 14px;
+          color: black;
+        }
+      }
+    }
+
+    .bottom-container {
+      display: flex;
+      justify-content: space-between;
+
+      .entry-time {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .chart-title {
+    padding: 16px;
+    overflow: hidden;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+
+    .icon {
+      margin-right: 4px;
+    }
+  }
+
+  .chart-title.no-pad {
+    padding: 0;
+  }
+
+  .charts-container > div {
+    flex-basis: 0;
+  }
+
+  .charts-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px;
+
+    .chart-tabs {
+      flex: 1;
+      background: white;
+      border-radius: 12px;
+
+      .ant-tabs-tab {
+        padding: 16px;
+      }
+
+      .ant-tabs-bar {
+        margin-bottom: 0;
+      }
+    }
+
+    .charts-layout {
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      border-radius: 12px;
+
+      svg {
+        overflow: visible;
+      }
+    }
+  }
+
+  .charts-container::before {
+    content: unset;
+  }
+
+  .charts-container::after {
+    content: unset;
+  }
+
+  .area-chart {
+    margin: 6px;
+    background: white;
+    border-radius: 12px;
+  }
+
+  .divider {
+    padding: 0;
+    margin: 0;
+  }
+}

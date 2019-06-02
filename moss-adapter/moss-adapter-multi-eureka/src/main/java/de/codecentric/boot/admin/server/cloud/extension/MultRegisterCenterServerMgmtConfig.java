@@ -1,6 +1,5 @@
 package de.codecentric.boot.admin.server.cloud.extension;
 
-import com.google.common.collect.Maps;
 import com.netflix.appinfo.ApplicationInfoManager;
 import com.netflix.appinfo.EurekaInstanceConfig;
 import com.netflix.appinfo.HealthCheckHandler;
@@ -12,6 +11,7 @@ import de.codecentric.boot.admin.server.domain.entities.Instance;
 import de.codecentric.boot.admin.server.domain.entities.SnapshottingInstanceRepository;
 import de.codecentric.boot.admin.server.eventstore.ConcurrentMapEventStore;
 import de.codecentric.boot.admin.server.services.InstanceRegistry;
+import org.moss.registry.adapter.DiscoveryRegistryManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -26,8 +26,6 @@ import org.springframework.cloud.netflix.eureka.metadata.ManagementMetadataProvi
 import org.springframework.cloud.netflix.eureka.serviceregistry.EurekaRegistration;
 import org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.util.StringUtils;
@@ -41,86 +39,26 @@ import java.util.stream.Collectors;
 
 import static org.springframework.cloud.commons.util.IdUtils.getDefaultInstanceId;
 
-@Configuration
-public class MultRegisterCenterServerMgmtConfig {
-
-    private static final Logger log = LoggerFactory.getLogger(MultRegisterCenterServerMgmtConfig.class);
-
+public class MultRegisterCenterServerMgmtConfig implements DiscoveryRegistryManager {
+    private MultRegisterCenter multRegisterCenter;
     @Autowired
     private InstanceRegistry registry;
-
     @Autowired
     private SnapshottingInstanceRepository snapshottingInstanceRepository;
-
     @Autowired
     private ApplicationContext context;
-
     @Autowired(required = false)
     private ObjectProvider<HealthCheckHandler> healthCheckHandler;
-
-
     @Autowired(required = false)
     private AbstractDiscoveryClientOptionalArgs<?> optionalArgs;
-
-    @Autowired
-    private MultRegisterCenterService multRegisterCenterService;
-
     @Autowired
     private ConfigurableEnvironment env;
-
     @Autowired
     private InetUtils inetUtils;
 
-    private static Map<String, String> URL_MAP=new ConcurrentHashMap<String, String>();;
-
-    private static MultRegisterCenter multRegisterCenter;
-
-    public static MultRegisterCenter getMultRegisterCenter(){
-        return multRegisterCenter;
-    }
-
-    public static String getCodeByClient(CloudEurekaClient client) {
-        return multRegisterCenter.getMultEurekaCodeMap().get(client);
-    }
-
-    public static HeartbeatMonitor getHeartbeatMonitorByClient(CloudEurekaClient client) {
-        return multRegisterCenter.getMultHeartbeatMonitorMap().get(client);
-    }
-
-
-    @Bean(destroyMethod = "shutdown")
-    public MultRegisterCenter initMultEureka() {
-        log.info("start  init MultRegisterCenter");
-        URL_MAP = multRegisterCenterService.getRegisterCenterList();
-        if(URL_MAP.isEmpty()){
-            multRegisterCenter = new MultRegisterCenter(new ConcurrentHashMap<String, EurekaClient>(),
-                    new ConcurrentHashMap<String, MossEurekaAutoServiceRegistration>(),
-                    new ConcurrentHashMap<EurekaClient, HeartbeatMonitor>());
-            return multRegisterCenter;
-        }
-        Map<String, EurekaClient> multEurekaMap = Maps.newConcurrentMap();
-        Map<String, MossEurekaAutoServiceRegistration> multRegistrationMap = Maps.newConcurrentMap();
-        Map<EurekaClient, HeartbeatMonitor> multHeartbeatMonitorMap=new ConcurrentHashMap<EurekaClient, HeartbeatMonitor>();
-        URL_MAP.entrySet().forEach(e -> {
-            log.info("start  init eureka server:{}",e.getKey()+"-"+e.getValue());
-            ManagementMetadataProvider managementMetadataProvider = serviceManagementMetadataProvider();
-            EurekaClientConfigBean configBean = eurekaClientConfigBean(env);
-            configBean.getServiceUrl().clear();
-            configBean.getServiceUrl().put(EurekaClientConfigBean.DEFAULT_ZONE, e.getValue());
-            EurekaInstanceConfigBean instanceConfigBean = eurekaInstanceConfigBean(inetUtils, env, managementMetadataProvider);
-            instanceConfigBean.setEnvironment(env);
-            ApplicationInfoManager manager = eurekaApplicationInfoManager(instanceConfigBean);
-            EurekaClient eurekaClient = eurekaClient(manager, configBean);
-            EurekaRegistration registration = eurekaRegistration(eurekaClient, instanceConfigBean, manager, healthCheckHandler);
-            MossEurekaAutoServiceRegistration autoServiceRegistration = eurekaAutoServiceRegistration(context, eurekaServiceRegistry(), registration,registration);
-            multEurekaMap.put(e.getKey(), eurekaClient);
-            multRegistrationMap.put(e.getKey(), autoServiceRegistration);
-            multHeartbeatMonitorMap.put(eurekaClient,new HeartbeatMonitor());
-            log.info("init eureka server:{} end!",e.getKey()+"-"+e.getValue());
-        });
-        multRegisterCenter = new MultRegisterCenter(multEurekaMap, multRegistrationMap,multHeartbeatMonitorMap);
-        log.info("init MultRegisterCenter End!");
-        return multRegisterCenter;
+    @Autowired
+    public void setMultRegisterCenter(MultRegisterCenter multRegisterCenter) {
+        this.multRegisterCenter = multRegisterCenter;
     }
 
     @EventListener(RefreshScopeRefreshedEvent.class)
@@ -144,7 +82,7 @@ public class MultRegisterCenterServerMgmtConfig {
 
     public MossEurekaAutoServiceRegistration eurekaAutoServiceRegistration(ApplicationContext context, EurekaServiceRegistry registry,
                                                                            EurekaRegistration registration, EurekaRegistration registration1) {
-        return new MossEurekaAutoServiceRegistration(context, registry, registration,registration1);
+        return new MossEurekaAutoServiceRegistration(context, registry, registration, registration1);
     }
 
     public EurekaClient eurekaClient(ApplicationInfoManager manager, EurekaClientConfig config) {
@@ -274,10 +212,11 @@ public class MultRegisterCenterServerMgmtConfig {
 
     /**
      * 动态添加一个注册中心
+     *
      * @param registerCenterCode
      * @param registerCenterUrl
      */
-    public void addEureka(String registerCenterCode,String registerCenterUrl) {
+    public void addEureka(String registerCenterCode, String registerCenterUrl) {
 
         ManagementMetadataProvider managementMetadataProvider = serviceManagementMetadataProvider();
         EurekaClientConfigBean configBean = eurekaClientConfigBean(env);
@@ -292,58 +231,58 @@ public class MultRegisterCenterServerMgmtConfig {
         /**
          * 添加EurekaClient,如果有就先删除，再添加
          */
-        Map<String, EurekaClient> multEurekaMap = MultRegisterCenterServerMgmtConfig.getMultRegisterCenter().getMultEurekaMap();
+        Map<String, EurekaClient> multEurekaMap = multRegisterCenter.getMultEurekaMap();
         revomeEurekaClientByCode(registerCenterCode);
         EurekaClient eurekaClient = eurekaClient(manager, configBean);
         multEurekaMap.put(registerCenterCode, eurekaClient);
-        multRegisterCenter.getMultEurekaCodeMap().put(eurekaClient,registerCenterCode);
+        multRegisterCenter.getMultEurekaCodeMap().put(eurekaClient, registerCenterCode);
 
         /**
          * 添加autoServiceRegistration,如果有就先删除，再添加
          */
-        Map<String, MossEurekaAutoServiceRegistration> multRegistrationMap= multRegisterCenter.getMultRegistrationMap();
+        Map<String, MossEurekaAutoServiceRegistration> multRegistrationMap = multRegisterCenter.getMultRegistrationMap();
         revomeServiceRegistration(registerCenterCode);
         EurekaRegistration registration = eurekaRegistration(eurekaClient, instanceConfigBean, manager, healthCheckHandler);
-        MossEurekaAutoServiceRegistration autoServiceRegistration = eurekaAutoServiceRegistration(context, eurekaServiceRegistry(), registration,registration);
+        MossEurekaAutoServiceRegistration autoServiceRegistration = eurekaAutoServiceRegistration(context, eurekaServiceRegistry(), registration, registration);
         autoServiceRegistration.start();
         multRegistrationMap.put(registerCenterCode, autoServiceRegistration);
 
         /**
          * 添加 HeartbeatMonitor
          */
-        Map<EurekaClient, HeartbeatMonitor> multHeartbeatMonitorMap= multRegisterCenter.getMultHeartbeatMonitorMap();
+        Map<EurekaClient, HeartbeatMonitor> multHeartbeatMonitorMap = multRegisterCenter.getMultHeartbeatMonitorMap();
         multHeartbeatMonitorMap.remove(registerCenterCode);
-        multHeartbeatMonitorMap.put(eurekaClient,new HeartbeatMonitor());
+        multHeartbeatMonitorMap.put(eurekaClient, new HeartbeatMonitor());
 
     }
 
 
     /**
      * 动态删除一个注册中心
+     *
      * @param registerCenterCode
      */
-    public void revomeEureka(String registerCenterCode){
+    public void revomeEureka(String registerCenterCode) {
         revomeEurekaClientByCode(registerCenterCode);
         revomeServiceRegistration(registerCenterCode);
         remoStaleInstancesBySource(registerCenterCode);
 
 
-
     }
 
     public void revomeServiceRegistration(String registerCenterCode) {
-        Map<String, MossEurekaAutoServiceRegistration> multRegistrationMap= multRegisterCenter.getMultRegistrationMap();
+        Map<String, MossEurekaAutoServiceRegistration> multRegistrationMap = multRegisterCenter.getMultRegistrationMap();
         MossEurekaAutoServiceRegistration mossEurekaAutoServiceRegistration = multRegisterCenter.getMultRegistrationMap().get(registerCenterCode);
-        if(null!= mossEurekaAutoServiceRegistration){
+        if (null != mossEurekaAutoServiceRegistration) {
             mossEurekaAutoServiceRegistration.stop();
             multRegistrationMap.remove(registerCenterCode);
         }
     }
 
     public void revomeEurekaClientByCode(String registerCenterCode) {
-        Map<String, EurekaClient> multEurekaMap= multRegisterCenter.getMultEurekaMap();
-        EurekaClient oldEurekClient=multEurekaMap.get(registerCenterCode);
-        if(null!=oldEurekClient){
+        Map<String, EurekaClient> multEurekaMap = multRegisterCenter.getMultEurekaMap();
+        EurekaClient oldEurekClient = multEurekaMap.get(registerCenterCode);
+        if (null != oldEurekClient) {
             multRegisterCenter.getMultEurekaCodeMap().remove(oldEurekClient);
             oldEurekClient.shutdown();
             multEurekaMap.remove(registerCenterCode);
@@ -353,18 +292,28 @@ public class MultRegisterCenterServerMgmtConfig {
 
     /**
      * 根据注册中心标识删除实例
+     *
      * @param source
      */
-    public  void remoStaleInstancesBySource(String source) {
-        Flux<Instance> instanceFlux=registry.getInstances().filter(Instance::isRegistered).filter(instance->source.equalsIgnoreCase(instance.getRegistration().getSource()));
+    public void remoStaleInstancesBySource(String source) {
+        Flux<Instance> instanceFlux = registry.getInstances().filter(Instance::isRegistered).filter(instance -> source.equalsIgnoreCase(instance.getRegistration().getSource()));
         List<Instance> instanceList = ReactorUtils.optional(instanceFlux).map(r -> r.stream()).get().collect(Collectors.toList());
-        for (Instance instance: instanceList) {
+        for (Instance instance : instanceList) {
             snapshottingInstanceRepository.revomeInstance(instance.getId());
-            ConcurrentMapEventStore InstanceEventStore=(ConcurrentMapEventStore)snapshottingInstanceRepository.getHaloEventStore();
+            ConcurrentMapEventStore InstanceEventStore = (ConcurrentMapEventStore) snapshottingInstanceRepository.getHaloEventStore();
             InstanceEventStore.getEventLog().remove(instance.getId());
 
         }
 
     }
 
+    @Override
+    public void removeRegistry(String code) {
+        this.revomeEureka(code);
+    }
+
+    @Override
+    public void addRegistry(String code, String url) {
+        this.addEureka(code, url);
+    }
 }

@@ -1,0 +1,160 @@
+@import (reference) '../../style/constants';
+@import (reference) '~antd/dist/antd.less';
+
+.service-card {
+  position: relative;
+  width: 280px;
+  padding: 20px;
+  background: @color-white;
+  border-radius: 6px;
+
+  .icon-card {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: @primary-color;
+    cursor: pointer;
+
+    &.red {
+      color: #ff4d4f;
+    }
+
+    &:hover {
+      color: @primary-5;
+    }
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    .meta-infos {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      .rate {
+        font-size: 14px;
+      }
+    }
+
+    .icon {
+      float: left;
+      width: 64px;
+      min-width: 64px;
+      height: 64px;
+      margin-right: 16px;
+    }
+
+    .name {
+      overflow: hidden;
+      font-size: 14px;
+      color: @text-color;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .owner {
+      margin-bottom: 2px;
+      font-size: 10px;
+      line-height: 13px;
+      color: fade(@text-color, 40);
+      // span {
+      //   color: rgba(0, 0, 0, 0.65);
+      // }
+    }
+
+    .url {
+      height: 21px;
+      overflow: hidden;
+      color: fade(@text-color, 50);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .status {
+    padding: 0;
+    margin-bottom: 0;
+    border: 1px solid @border-color-base;
+    border-right: none;
+    border-radius: 5px 5px 0 0;
+
+    &.bottom {
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 5px;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & > div {
+      position: relative;
+      height: 60px;
+      overflow: hidden;
+      font-weight: 700;
+      text-align: right;
+      text-overflow: ellipsis;
+      list-style: none;
+      border-right: 1px solid @border-color-base;
+
+      span {
+        font-size: 10px;
+        font-weight: normal;
+        line-height: 10px;
+        color: @text-color;
+      }
+
+      span:nth-of-type(1) {
+        margin-bottom: 12px;
+      }
+
+      .status-value {
+        color: @color-blue;
+      }
+
+      .owner-value {
+        color: @color-orange;
+        border: none;
+      }
+    }
+  }
+
+  .charts {
+    padding: 0;
+    margin: 0;
+
+    & > li {
+      height: 45px;
+      margin-top: 8px;
+      list-style: none;
+      border: 1px solid @border-color-base;
+      border-radius: 5px;
+
+      &:first-child {
+        margin-top: 0;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+      }
+    }
+  }
+
+  .switch {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    margin-left: -7px;
+  }
+}

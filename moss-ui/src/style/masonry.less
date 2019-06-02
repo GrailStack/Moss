@@ -1,0 +1,538 @@
+@import (reference) './constants';
+
+/* The Masonry Container */
+.masonry {
+  margin-bottom: 20px;
+}
+
+/* The Masonry Brick */
+.masonry-item {
+  margin-bottom: 12px;
+  break-inside: avoid;
+}
+
+.noData {
+  height: 50px;
+  padding-left: 50px;
+  line-height: 50px;
+  background: #fff;
+}
+
+/* Log 按钮 */
+.logList {
+  .operation {
+    height: 44px;
+    padding-top: 6px;
+    line-height: 44px;
+    background: #fff;
+  }
+
+  .rowList {
+    .ant-row {
+      padding-left: 13px;
+      margin-bottom: 10px;
+      line-height: 36px;
+      border: 1px solid #e9eff4;
+      border-radius: 5px;
+      box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
+    }
+
+    .button-OFF,
+    .button-OFF:hover,
+    .button-default-OFF:hover {
+      color: #fff;
+      background-color: #000;
+      border-color: #000;
+    }
+
+    .button-ERROR,
+    .button-ERROR:hover,
+    .button-default-ERROR:hover {
+      color: #000;
+      background-color: #fc9b8c;
+      border-color: #fc9b8c;
+    }
+
+    .button-WARN,
+    .button-WARN:hover,
+    .button-default-WARN:hover {
+      color: #000;
+      background-color: #9ffc8c;
+      border-color: #9ffc8c;
+    }
+
+    .button-INFO,
+    .button-INFO:hover,
+    .button-default-INFO:hover {
+      color: #000;
+      background-color: #8cfcde;
+      border-color: #8cfcde;
+    }
+
+    .button-DEBUG,
+    .button-DEBUG:hover,
+    .button-default-DEBUG:hover {
+      color: #000;
+      background-color: #bfc4be;
+      border-color: #bfc4be;
+    }
+
+    .button-TRACE,
+    .button-TRACE:hover,
+    .button-default-TRACE:hover {
+      color: #000;
+      background-color: #fcf58c;
+      border-color: #fcf58c;
+    }
+
+    .button-WHITE {
+      color: #000;
+      background-color: #fff;
+      border-color: #fff;
+    }
+  }
+}
+
+/* logDel */
+.logDel {
+  .warn {
+    font-style: normal;
+    color: red;
+  }
+
+  .error {
+    font-style: normal;
+    color: red;
+  }
+}
+
+/* JVM */
+.antvMain {
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 9px 0 rgba(44, 42, 42, 0.22);
+
+  .sectionBj {
+    padding: 20px 0;
+    margin-bottom: 30px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+
+    .title {
+      display: block;
+      padding-left: 50px;
+
+      .btnI {
+        float: right;
+        margin: 0 20px;
+        font-style: normal;
+        cursor: pointer;
+      }
+
+      .btnI.active {
+        color: @primary-color;
+      }
+    }
+  }
+
+  .selectNode {
+    width: 180px;
+    height: 44px;
+    margin-bottom: 30px;
+    background: rgba(214, 223, 229, 0.48);
+    border-radius: 4px;
+
+    .ant-btn-sm {
+      height: 32px;
+      font-size: 13px;
+      border-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 2px 9px 0 rgba(44, 42, 42, 0.22);
+
+      > i {
+        font-style: normal;
+        color: #007aff;
+      }
+    }
+  }
+}
+
+/* 环境配置 */
+.EnvironConfig {
+  .left {
+    float: left;
+    width: 318px;
+    padding: 30px;
+    margin-right: 35px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
+
+    .btnLeft {
+      width: 100%;
+      height: 53px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      font-size: 13.5px;
+      color: #000;
+      text-align: left;
+      background: #fff;
+      border: 1px solid #e9eff4;
+      border-radius: 5px;
+    }
+
+    .btnLeft.active {
+      color: #fff;
+      background: @primary-color;
+      border-radius: 5px;
+    }
+
+    i {
+      display: block;
+      margin-bottom: 16px;
+      font-size: 11px;
+      font-style: normal;
+      color: #323c47;
+      letter-spacing: 0.1px;
+    }
+  }
+
+  .right {
+    padding: 30px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.03);
+
+    .title {
+      display: block;
+      margin-bottom: 16px;
+      font-size: 11px;
+      font-style: normal;
+      color: #323c47;
+      letter-spacing: 0.1px;
+    }
+
+    .nameSpace {
+      position: relative;
+      float: left;
+      height: 53px;
+      padding: 0 23px;
+      margin: 0 23px 23px 0;
+      font-size: 12px;
+      line-height: 48px;
+      color: #323c47;
+      letter-spacing: 0.11px;
+      background: #fff;
+      border: 1px solid #e9eff4;
+      border-radius: 5px;
+    }
+
+    .nameSpace.active {
+      border: 1px solid @primary-color;
+    }
+
+    .nameSpace.active::after {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      display: block;
+      width: 8px;
+      height: 8px;
+      content: '';
+      background: @primary-color;
+      border-radius: 8px;
+    }
+
+    .configList {
+      border-bottom: 1px solid #e9eff4;
+
+      .config-list-item {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      div {
+        font-size: 13.5px;
+        line-height: 33px;
+        color: #000;
+      }
+    }
+  }
+}
+
+// JMX
+.pageJmx {
+  padding-bottom: 0;
+}
+
+.jmx-page {
+  display: flex;
+  align-items: stretch;
+  height: calc(100vh - 200px);
+  padding: 0;
+  margin-bottom: 0;
+
+  .page-section-content {
+    padding-top: 30px;
+    overflow-y: auto;
+  }
+
+  .jmx-sidebar {
+    width: 320px;
+    margin-right: 35px;
+  }
+
+  .jmx-content {
+    flex: 1;
+  }
+
+  .jmx-domains {
+    border-right: 0;
+
+    > li {
+      margin-bottom: 12px;
+    }
+
+    .ant-menu-submenu-title {
+      display: flex;
+      align-items: center;
+      height: 53px;
+      padding-right: 30px;
+      padding-left: 20px;
+      font-size: 14px;
+      color: #323c47;
+      background-color: #fff;
+      border: 1px solid #e9eff4;
+      border-radius: 5px;
+
+      > div {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        line-height: 20px;
+        word-break: break-all;
+        white-space: normal;
+      }
+    }
+
+    .ant-menu-submenu-open {
+      .ant-menu-submenu-title {
+        color: #fff;
+        background-color: @primary-color;
+        border-color: @primary-color;
+
+        &:hover .ant-menu-submenu-arrow::before,
+        &:hover .ant-menu-submenu-arrow::after {
+          background: linear-gradient(#fff, #fff);
+        }
+
+        i::before,
+        i::after {
+          background-image: none;
+        }
+      }
+    }
+
+    .ant-menu-sub {
+      .ant-menu-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        line-height: 20px;
+        word-break: break-all;
+        white-space: normal;
+      }
+    }
+  }
+
+  .mbeans {
+    margin-bottom: 20px;
+  }
+
+  .mbeans-head {
+    color: #fff;
+    background-color: @primary-color;
+
+    .title {
+      position: relative;
+      padding: 10px;
+      font-size: 12px;
+    }
+  }
+
+  .mbeans-tabs {
+    display: flex;
+    padding-left: 10px;
+    margin-top: 20px;
+
+    > div {
+      padding: 5px 10px;
+      font-size: 12px;
+      color: #333;
+      background-color: #fff;
+      border-radius: 3px 3px 0 0;
+    }
+  }
+
+  .mbeans-body {
+    padding: 15px;
+    border-right: 1px solid @color-border;
+    border-bottom: 1px solid @color-border;
+    border-left: 1px solid @color-border;
+  }
+
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+.delIcon {
+  background: url(../assets/delIcon.jpg) no-repeat center center;
+  background-size: 65% auto;
+}
+
+.tableTool{
+  padding: 18px;
+}
+
+.AppSearch {
+  .btnAppAdd{
+    //margin-top: 4px;
+    //margin-left: 4px;
+  }
+  .btnRefresh {
+    float: right;
+    margin-top: 4px;
+  }
+
+  .btnRefreshHide {
+    display: none;
+  }
+
+
+}
+
+.icon-reference-link {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+}
+
+.trace {
+  i.statusI {
+    display: inline-block;
+    width: 48px;
+    padding: 2px 10px;
+    font-style: normal;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  i.red {
+    background: red;
+  }
+
+  i.green {
+    background: green;
+  }
+
+  i.yellow {
+    background: yellow;
+  }
+}
+
+.g-label {
+  width: 250; //320 hack for Axis custom htmlTemplate label; without the width, the width of HTML tag will be wired !
+}
+
+.app-topo {
+  .node-name {
+    cursor: move;
+  }
+
+  .link {
+    fill: rgba(255, 255, 255, 0);
+    stroke: rgba(24, 144, 255, 0.8);
+    stroke-linecap: round;
+    animation: dash 6s linear infinite;
+  }
+
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 330;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .link2 {
+    stroke: rgb(80, 80, 80);
+  }
+
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 220;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .linkText {
+    font-family: 'SimSun', sans-serif;
+    fill: #eee;
+  }
+
+  .user {
+    cursor: move;
+    fill: #3890ff;
+  }
+
+  .user-content {
+    cursor: move;
+    fill: #217ef2;
+  }
+
+  .out {
+    cursor: move;
+    fill: #a330ec;
+  }
+
+  .out-title {
+    cursor: move;
+    fill: #9026d4;
+  }
+
+  .node {
+    cursor: move;
+    fill: rgb(255, 255, 255);
+    stroke: #dddd;
+    stroke-width: 2;
+  }
+
+  .node-error {
+    cursor: move;
+    fill: rgba(255, 255, 255, 0.5);
+    stroke: rgba(226, 61, 61, 0.6);
+    stroke-width: 2;
+  }
+
+  .node-title {
+    cursor: move;
+    fill: #4c4c4e;
+  }
+}

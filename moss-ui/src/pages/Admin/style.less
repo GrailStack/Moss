@@ -1,0 +1,19 @@
+#stage {
+  display: flex;
+
+  iframe {
+    flex: auto;
+    overflow: auto;
+    border: 0;
+  }
+
+  & > div {
+    display: none;
+    flex: auto;
+    flex-direction: column;
+
+    &.active {
+      display: flex;
+    }
+  }
+}

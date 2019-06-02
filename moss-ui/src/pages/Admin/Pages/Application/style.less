@@ -1,0 +1,521 @@
+@import (reference) '../../../../style/constants.less';
+@jar-chart-top: 264px;
+@header-top: 142px;
+
+.pinpoint {
+  .page-section-content {
+    height: 480px;
+  }
+}
+
+.event {
+  .page-section-content {
+    min-height: 174px;
+  }
+
+  .events-list {
+    position: relative;
+    max-height: 488px;
+    overflow: scroll;
+  }
+}
+
+.build {
+  display: flex;
+
+  & > div {
+    flex: 1;
+
+    .ant-col-16 {
+      overflow: hidden;
+      text-align: right;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      white-space: nowrap;
+    }
+  }
+}
+
+.page.logDel {
+  .log-code {
+    display: block;
+    user-select: text;
+
+    mark {
+      background: transparent;
+    }
+
+    span {
+      white-space: pre-line;
+    }
+
+    code {
+      display: block;
+    }
+  }
+}
+
+.health {
+  .health-content {
+    .health-status {
+      margin-left: 8px;
+    }
+  }
+}
+
+.json-tree-dialog {
+  ul {
+    padding: 0 10px 2px 6px !important;
+  }
+}
+
+.link {
+  stroke: #ccc;
+}
+
+.node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+.big {
+  background: red;
+}
+
+.node-data-panel {
+  position: absolute;
+  top: @header-top;
+  right: 12px;
+  width: 450px;
+  max-height: 916px;
+  padding: 12px;
+  overflow: scroll;
+  color: white;
+  background: #6c6e6f;
+  border-radius: 8px;
+  opacity: 0.9;
+
+  p {
+    margin-bottom: 14px;
+    font-size: 16px;
+    line-height: 1;
+    word-break: break-all;
+  }
+
+  .dep {
+    padding-left: 24px;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.category-tag-container {
+  position: absolute;
+  top: @jar-chart-top;
+  left: 50%;
+  display: flex;
+
+  .tag {
+    display: flex;
+    padding: 8px;
+
+    p {
+      height: 15px;
+      margin-bottom: 0;
+      margin-left: 4px;
+      line-height: 15px;
+    }
+
+    .anticon {
+      margin-left: 4px;
+    }
+  }
+
+  #tag {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    content: '';
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+  }
+
+  .tag-normal::before {
+    #tag();
+
+    background-color: #59ca74;
+  }
+
+  .tag-start::before {
+    #tag();
+
+    background-color: #fea52d;
+  }
+
+  .tag-low::before {
+    #tag();
+
+    background-color: #f3667c;
+  }
+
+  .tag-many::before {
+    #tag();
+
+    background-color: #fdff00;
+  }
+}
+
+.jardeps {
+  position: relative;
+}
+
+.panel-content-container {
+  padding: 16px 16px 16px 48px;
+  margin: -16px -16px -32px -16px;
+  background: #eee;
+
+  .title {
+    height: 50px;
+    padding: 8px 0 0 40px;
+    margin: -16px -16px 0 -48px;
+    font-size: 18px;
+    background: white;
+  }
+
+  .dep {
+    border-bottom: 1px solid #dedede;
+  }
+
+  .dep:nth-of-type(1) {
+    margin-top: 12px;
+  }
+}
+
+.ant-collapse-header {
+  font-size: 16px;
+}
+
+#chart {
+  padding-top: 40px;
+}
+
+.jar-framework-panel {
+  position: absolute;
+  top: @jar-chart-top + 42px;
+  padding-left: 0;
+  margin-top: 8px;
+  margin-left: 38px;
+  opacity: 0.8;
+
+  .page-section-list {
+    width: 420px;
+  }
+}
+
+.jar-chart-tab {
+  position: absolute;
+  top: @jar-chart-top;
+  margin-top: 8px;
+  margin-left: 38px;
+
+  .search-deps {
+    margin-left: 12px;
+  }
+}
+
+.page-jar {
+  .tree-chart-container {
+    margin-top: 56px;
+  }
+}
+
+.html-legend {
+  .legend {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    span {
+      margin-bottom: 0;
+      font-size: 12px;
+      font-weight: 550;
+      color: black;
+      transform: scale(0.7);
+    }
+
+    .stateTag {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    .name {
+      display: inline-block;
+      width: 210px;
+      margin-bottom: 0;
+      margin-left: 6px;
+      overflow: hidden;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transform: scale(0.9);
+    }
+  }
+}
+
+.thread-state-chart-container {
+  position: relative;
+  display: flex;
+
+  .y-axis {
+    width: 250px;
+    padding-top: 40px;
+    padding-left: 6px;
+  }
+
+  .x-axis {
+    position: absolute;
+    top: 0;
+    left: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 16px;
+    font-size: 12px;
+    transform: scale(0.8, 0.8); // !!!
+    transform-origin: top left;
+
+    .x-axis-item {
+      margin-bottom: 0;
+      line-height: 1;
+    }
+  }
+
+  #d3-thread-state {
+    position: absolute;
+    top: 0;
+    left: 250px;
+  }
+}
+
+.fade-enter {
+  opacity: 0.4;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 375ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 375ms ease-in;
+}
+
+// EventLog 事件日志
+.event-list {
+  .eventlist-table {
+    background: white;
+    border-radius: 8px;
+  }
+
+  .ant-table-body {
+    padding: 20px;
+  }
+}
+
+// Project
+.page-project {
+  .project-table {
+    background: white;
+    border-radius: 8px;
+  }
+
+  .ant-table-body {
+    padding: 20px;
+  }
+
+  .project-container {
+    background: white;
+
+    .create-project {
+      padding: 20px;
+      padding-bottom: 0;
+    }
+  }
+}
+
+// 创建项目
+.page-create-project {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+  }
+
+  .creat-project-form {
+    width: 40vw;
+    margin-top: 24px;
+  }
+}
+
+.page-service {
+  .table-view {
+    background: white;
+
+    .ant-table-body {
+      padding: 20px;
+    }
+  }
+
+  .view-switch {
+    margin-bottom: 12px;
+  }
+}
+
+.page-remote-config {
+  .content-board {
+    padding: 20px;
+
+    .search-row {
+      margin-bottom: 12px;
+
+      .ant-advanced-search-form .ant-form-item {
+        margin-bottom: 0;
+      }
+
+      .ant-advanced-search-form {
+        margin-top: 0;
+      }
+    }
+
+    .table-types {
+      .ant-table-row {
+        background: #f7f7f7;
+      }
+
+      .ant-table-expanded-row {
+        background: white;
+      }
+
+      .ant-table-thead > tr > th {
+        font-weight: bold;
+        background: #e8e8e8;
+      }
+    }
+
+    .options-container {
+      padding: 16px;
+      margin: -16px;
+      margin-right: 0;
+      border-right: 1px solid #e8e8e8;
+      border-left: 1px solid #e8e8e8;
+
+      .btn-add-option {
+        margin-bottom: 16px;
+      }
+
+      .ant-table-small {
+        border-right: none;
+        border-left: none;
+        border-radius: 0;
+      }
+
+      .ant-table-row {
+        background: white;
+      }
+    }
+  }
+
+  .editable-cell-form {
+    .ant-form-item-control {
+      line-height: unset;
+    }
+  }
+
+  .status-select {
+    width: 100%;
+  }
+
+  .ant-table-thead > tr > th > div {
+    padding-left: 11px;
+  }
+
+  .ant-input.readonly {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .options-table {
+    .ant-table-placeholder {
+      background: transparent;
+    }
+  }
+}
+
+.page-trajectory {
+  .table-container {
+    padding: 20px;
+    background: white;
+  }
+}
+
+.page-call-trace {
+  .chart-tip {
+    margin-right: 30px;
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
+  .chart-divider {
+    width: 90%;
+    min-width: 90%;
+    margin-left: 5%;
+  }
+
+  .selectNode {
+    width: 180px;
+    height: 44px;
+    margin-top: 12px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    background: rgba(214, 223, 229, 0.48);
+    border-radius: 4px;
+
+    .ant-btn-sm {
+      height: 32px;
+      font-size: 13px;
+      border-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 2px 9px 0 rgba(44, 42, 42, 0.22);
+
+      > i {
+        font-style: normal;
+        color: #007aff;
+      }
+    }
+  }
+}
+
+.page-jvm {
+  .page-title-text {
+    width: 100%;
+  }
+
+  .btn-download-dump {
+    position: relative;
+    top: 32px;
+  }
+}
