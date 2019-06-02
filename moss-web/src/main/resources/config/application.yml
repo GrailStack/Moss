@@ -44,7 +44,6 @@ moss.skywalking.url: http://localhost:8083/
 logging:
   moss:
     path: logs
-<<<<<<< HEAD
   registry:
     files:
     - name: info
@@ -55,5 +54,3 @@ logging:
       path: logs/${spring.application.name}/error.log
     - name: gclog
       path: logs/${spring.application.name}/gc.log
-=======
->>>>>>> 91b037d... Update default config
