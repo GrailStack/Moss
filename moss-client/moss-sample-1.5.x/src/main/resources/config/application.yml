@@ -7,8 +7,8 @@ info.groupId: @project.groupId@
 info.artifactId: @project.artifactId@
 info.version: @project.version@
 
-logging.registry.files[0].name: tomcat_stdout
+logging.registry.files[0].name: info
 logging.registry.files[0].description: 标准输出
-logging.registry.files[0].path: ./spring.log
+logging.registry.files[0].path: logs/${spring.application.name}/info.log
 logging.registry.files[1].name: gclog
-logging.registry.files[1].path: ${user.home}/logs/sys/${spring.application.name}/gc.log
+logging.registry.files[1].path: logs/${spring.application.name}/gc.log

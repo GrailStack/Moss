@@ -10,14 +10,14 @@
 	</appender>
 	<appender name="SYSTEM_ERROR_FILE"
 			  class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${logDir}/${app.name}_error.log</File>
+		<File>${logDir}/${app.name}/error.log</File>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>ERROR</level>
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${logDir}/history/${app.name}_error.%d{yyyy-MM-dd}.%i</fileNamePattern>
+			<fileNamePattern>${logDir}/history/${app.name}/error.%d{yyyy-MM-dd}.%i</fileNamePattern>
 			<maxHistory>7</maxHistory>
 			<maxFileSize>10MB</maxFileSize>
 		</rollingPolicy>
@@ -29,14 +29,14 @@
 
 	<appender name="SYSTEM_INFO_FILE"
 			  class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${logDir}/${app.name}_info.log</File>
+		<File>${logDir}/${app.name}/info.log</File>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>INFO</level>
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${logDir}/history/${app.name}_info.%d{yyyy-MM-dd}.%i</fileNamePattern>
+			<fileNamePattern>${logDir}/history/${app.name}/info.%d{yyyy-MM-dd}.%i</fileNamePattern>
 			<maxHistory>7</maxHistory>
 			<maxFileSize>10MB</maxFileSize>
 		</rollingPolicy>
