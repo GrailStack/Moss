@@ -75,7 +75,7 @@ const HaloHeader = React.memo((props: IProps & RouteComponentProps) => {
 
           </Dropdown>
         </Item>
-        <SubMenu className="user-name" title={name}>
+        <SubMenu className="user-name" title={userName}>
           <Item>
             <a href="/logout">退出</a>
           </Item>
