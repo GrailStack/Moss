@@ -35,6 +35,12 @@
                 <discovery.type>zookeeper</discovery.type>
             </properties>
         </profile>
+        <profile>
+            <id>consul</id>
+            <properties>
+                <discovery.type>consul</discovery.type>
+            </properties>
+        </profile>
     </profiles>
     <dependencies>
 

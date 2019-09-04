@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: ${management.context-path}/health
+        healthCheckInterval: 15s
+        tags: management.port=${management.port}

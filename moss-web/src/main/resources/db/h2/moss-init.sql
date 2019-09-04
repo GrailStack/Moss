@@ -173,6 +173,8 @@ CREATE TABLE `t_register_center` (
 -- ----------------------------
 
 INSERT INTO `t_register_center` VALUES ('1', 'sq', 'http://eureka.springcloud.cn/eureka/', '社区注册', '1', '2019-04-04 04:28:11', '2019-04-05 18:54:45', '0', '社区注册'), ('4', 'zj', 'http://localhost:8071/eureka', '自己本地', '0', '2019-04-20 22:37:04', '2019-04-21 11:37:25', '0', '自己本地');
+-- consul
+-- INSERT INTO `t_register_center` VALUES ('4', 'zj', 'localhost', '自己本地', '0', '2019-04-20 22:37:04', '2019-04-21 11:37:25', '0', '自己本地');
 COMMIT;
 
 -- ----------------------------

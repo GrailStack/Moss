@@ -1,0 +1,10 @@
+management:
+  server:
+    port: 8082
+
+
+spring:
+  cloud:
+    consul:
+      discovery:
+        tags: management.port=${management.port}

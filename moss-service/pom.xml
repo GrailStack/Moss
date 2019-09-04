@@ -39,6 +39,16 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>consul</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.xujin.moss</groupId>
+                    <artifactId>moss-adapter-multi-consul</artifactId>
+                    <version>1.0.0.RELEASE</version>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
     <dependencies>
 
