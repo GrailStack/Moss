@@ -243,6 +243,17 @@ info.version: @project.version@
 5. 如需修改后端数据库，将 moss-web/src/main/resources/config/application.yml 
 中 `spring.profiles.active` 的 h2 改为 mysql，并修改 application-mysql 中的连接地址、username/password。
 
+#### 2.3.3 docker镜像运行
+
+1.根目录安装各个依赖
+`mvn install -Dmaven.test.skip=true`
+
+2.根目录进入moss-web目录 docker镜像打包：
+`cd moss-web && mvn package && mvn docker:build`
+
+3.根目录进入docker-compose启动
+`cd docker-compose && docker-compose -f docker-compose.yml up`
+
 
 ## 3.Moss的实现细节
 
