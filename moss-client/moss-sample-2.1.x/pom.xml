@@ -57,6 +57,18 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>consul</id>
+            <properties>
+                <discovery.type>consul</discovery.type>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
     <dependencyManagement>
         <dependencies>

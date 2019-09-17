@@ -16,6 +16,7 @@
         <module>moss-adapter-single-eureka</module>
         <module>moss-adapter-single-nacos</module>
         <module>moss-adapter-multi-eureka</module>
+        <module>moss-adapter-multi-consul</module>
         <module>moss-adapter-multi-zookeeper</module>
         <module>moss-adapter-cloud</module>
        <!-- <module>moss-adapter-multi-nacos</module>-->
