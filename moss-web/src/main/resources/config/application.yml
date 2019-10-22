@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: h2, @discovery.type@
+    active: ${MOSS_DB_TYPE:h2}, @discovery.type@
   application:
     name: halo-moss
   boot:
@@ -34,12 +34,12 @@ spring:
       - "caches"
       - "beans"
 server:
-  port: 8086
+  port: ${MOSS_PORT:8086}
 #management.jolokia.enabled: true
 management.endpoints.health.show-details: true
 
 ### 替换成自己的skywalking URL
-moss.skywalking.url: http://localhost:8083/
+moss.skywalking.url: http://${MOSS_SKYWALKING_HOST:localhost}:${MOSS_SKYWALKING_PORT:8083}/
 
 logging:
   moss:
