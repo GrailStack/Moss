@@ -12,3 +12,5 @@ logging.registry.files[0].description: 标准输出
 logging.registry.files[0].path: logs/${spring.application.name}/info.log
 logging.registry.files[1].name: gclog
 logging.registry.files[1].path: logs/${spring.application.name}/gc.log
+
+management.port: 8089

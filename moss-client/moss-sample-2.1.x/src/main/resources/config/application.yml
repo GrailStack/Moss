@@ -10,3 +10,6 @@ logging:
       path: logs/${spring.application.name}/info.log
     - name: gclog
       path: logs/${spring.application.name}/gc.log
+
+
+management.server.port: 8992

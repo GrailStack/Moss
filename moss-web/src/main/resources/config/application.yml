@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: ${MOSS_DB_TYPE:mysql}, @discovery.type@
+    active: ${MOSS_DB_TYPE:h2}, @discovery.type@
   application:
     name: halo-moss
   boot:
