@@ -49,6 +49,16 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>nacos</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.xujin.moss</groupId>
+                    <artifactId>moss-adapter-single-nacos</artifactId>
+                    <version>1.0.0.RELEASE</version>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
     <dependencies>
 
