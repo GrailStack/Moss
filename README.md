@@ -29,8 +29,8 @@ Moss(莫斯),让Spring Cloud应用不再流浪！
  
  <img
       alt="moss"
-      src="/doc/images/ddq.jpeg"
-      width="25%" />
+      src="/doc/images/ddq.png"
+      width="35%" />
        
  #### 1.2.1 竞品分析
 
