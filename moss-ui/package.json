@@ -65,7 +65,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
-    "umi": "^2.6.12",
+    "umi": "^4.0.41",
     "umi-plugin-react": "^1.4.0"
   },
   "lint-staged": {
