@@ -29,7 +29,7 @@
         <!-- used dependencies versions -->
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-        <hazelcast-tests.version>3.11</hazelcast-tests.version>
+        <hazelcast-tests.version>3.12.13</hazelcast-tests.version>
         <findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
         <curator.version>2.12.0</curator.version>
     </properties>
