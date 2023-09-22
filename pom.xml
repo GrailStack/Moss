@@ -27,7 +27,7 @@
         <build-plugin.exec.version>1.6.0</build-plugin.exec.version>
         <build-plugin.git-commit-id.version>2.2.2</build-plugin.git-commit-id.version>
         <!-- used dependencies versions -->
-        <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <hazelcast-tests.version>3.11</hazelcast-tests.version>
         <findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
